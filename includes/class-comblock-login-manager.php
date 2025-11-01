@@ -22,8 +22,9 @@ class Comblock_Login_Manager
     public function register_shortcode(): void
     {
         $this->register_login_shortcode();
-
         $this->register_logout_shortcode();
+        $this->register_disconnection_shortcode();
+        $this->register_user_info_shortcode();
     }
 
     /**
@@ -76,6 +77,58 @@ class Comblock_Login_Manager
         };
 
         add_shortcode('comblock_logout', $callback);
+    }
+
+    /**
+     * Registers the [comblock_user_info] shortcode with WordPress.
+     *
+     * The shortcode callback handles rendering user information and logout from all devices.
+     *
+     * @since 1.0.0
+     *
+     * @example [user_info]
+     *
+     * @access protected
+     *
+     * @return void
+     */
+    protected function register_user_info_shortcode(): void
+    {
+        /**
+         * @var callback<array<string, scalar>> $callback
+         * @return string
+         */
+        $callback = function (array $attributes = []): string {
+            return comblock_user_info_shortcode_template($attributes);
+        };
+
+        add_shortcode('comblock_user_info', $callback);
+    }
+
+    /**
+     * Registers the [comblock_disconnection] shortcode with WordPress.
+     *
+     * The shortcode callback handles rendering the disconnection link.
+     *
+     * @since 1.0.0
+     *
+     * @example [comblock_disconnection id="subscriber-disconnection" class="comblock-form__disconnection"]
+     *
+     * @access protected
+     *
+     * @return void
+     */
+    protected function register_disconnection_shortcode(): void
+    {
+        /**
+         * @var callback<array<string, scalar>> $callback
+         * @return string
+         */
+        $callback = function (array $attributes = []): string {
+            return comblock_disconnection_shortcode_template($attributes);
+        };
+
+        add_shortcode('comblock_disconnection', $callback);
     }
 
     /**
@@ -280,5 +333,39 @@ class Comblock_Login_Manager
             wp_safe_redirect($redirect_to);
             exit;
         }
+    }
+
+    /**
+     * Handles logging out the user from all devices.
+     *
+     * This function verifies the nonce for security, checks if the user is logged in,
+     * destroys all active sessions for the user, logs out the current session,
+     * and redirects to the home page.
+     *
+     * @since 1.0.0
+     *
+     * @return void
+     */
+    public function handle_logout_all_devices(): void
+    {
+        if (!isset($_POST['logout_all_devices_nonce']) || !wp_verify_nonce($_POST['logout_all_devices_nonce'], 'logout_all_devices_action')) {
+            return;
+        }
+
+        if (!is_user_logged_in()) {
+            return;
+        }
+
+        /** * @var int $user_id */
+        $user_id = get_current_user_id();
+
+        wp_destroy_all_sessions($user_id);
+        wp_logout();
+
+        /** * @var string $redirect_to */
+        $redirect_to = home_url();
+
+        wp_safe_redirect($redirect_to);
+        exit;
     }
 }

@@ -58,8 +58,10 @@ class Comblock_Login
         require_once $plugin_path . 'includes/class-comblock-login-dashboard.php';
         require_once $plugin_path . 'includes/class-comblock-login-manager.php';
         require_once $plugin_path . 'public/class-comblock-login-public.php';
-        require_once $plugin_path . 'templates/login.php';
-        require_once $plugin_path . 'templates/logout.php';
+        require_once $plugin_path . 'templates/template-shortcode-auth-login.php';
+        require_once $plugin_path . 'templates/template-shortcode-auth-logout.php';
+        require_once $plugin_path . 'templates/template-shortcode-auth-disconnection.php';
+        require_once $plugin_path . 'templates/template-shortcode-user-info.php';
 
         $this->loader = new Comblock_Login_Loader();
     }
@@ -68,6 +70,9 @@ class Comblock_Login
      * Defines all hooks for the plugin (actions and shortcodes).
      *
      * @since 1.0.0
+     * 
+     * @access protected
+     * 
      * @return void
      */
     protected function define_hooks(): void
@@ -87,6 +92,8 @@ class Comblock_Login
         $this->loader->add_action('init', $dashboard, 'register_post_type');
         $this->loader->add_action('add_meta_boxes', $dashboard, 'add_meta_boxes');
         $this->loader->add_action('save_post_' . Comblock_Login_Dashboard::POST_TYPE_SLUG, $dashboard, 'save_post');
+        $this->loader->add_action('admin_post_nopriv_logout_all_devices', $manager, 'handle_logout_all_devices');
+        $this->loader->add_action('admin_post_logout_all_devices', $manager, 'handle_logout_all_devices');
     }
 
     /**
