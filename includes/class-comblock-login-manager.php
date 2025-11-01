@@ -145,11 +145,11 @@ class Comblock_Login_Manager
             set_transient('comblock_login_errors', $e->getMessage(), 30);
 
             // On error, redirect back to referer or fallback to home URL
-            $redirect = wp_get_referer() ?: '';
+            $redirect = wp_get_raw_referer() ?: '';
         }
 
         // Validate redirect URL; fallback to home URL if invalid
-        if (empty($redirect) || !wp_validate_redirect($redirect, home_url())) {
+        if (!wp_validate_redirect($redirect, home_url())) {
             $redirect = home_url();
         }
 
