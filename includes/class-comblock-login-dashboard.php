@@ -50,7 +50,7 @@ class Comblock_Login_Dashboard
 
     /**
      * Add meta boxes for roles and login page selection
-     * 
+     *
      * @return void
      */
     public function add_meta_boxes(): void
@@ -61,7 +61,7 @@ class Comblock_Login_Dashboard
 
     /**
      * Render the roles checkbox list in the metabox using template placeholders and output buffering.
-     * 
+     *
      * @param WP_Post $post
      */
     public function render_roles_metabox(WP_Post $post): void
@@ -83,14 +83,14 @@ class Comblock_Login_Dashboard
 
         /**
          * Get saved roles or empty array if none
-         * 
+         *
          * @var array<string, array<string, string>> $roles
          */
         $roles = get_post_meta($post->ID, 'allowed_user_roles', false) ?: [];
 
         /**
          * Informative text
-         * 
+         *
          * @var string $info
          */
         $info = __('Select the user roles that can access the dashboard. By default, all roles can access it.', 'comblock-login');
@@ -129,7 +129,7 @@ class Comblock_Login_Dashboard
 
     /**
      * Render select list of pages for login page
-     * 
+     *
      * @param WP_Post $post
      */
     public function render_login_page_metabox(WP_Post $post): void
@@ -139,7 +139,7 @@ class Comblock_Login_Dashboard
 
         /**
          * Retrieve all published pages
-         * 
+         *
          * @var WP_Post[]
          */
         $pages = get_posts([
@@ -168,21 +168,21 @@ class Comblock_Login_Dashboard
 
         /**
          * Informative text
-         * 
+         *
          * @var string $info
          */
         $info = __('Select the login page that allows you to access this dashboard.', 'comblock-login');
 
         /**
          * Template HTML
-         * 
+         *
          * @var string $template_html
          */
         $template_html = sprintf('%s<p>%s</p><p><select name="login_page_id">%s</select></p>', $nonce, $info, $options_html);
 
         /**
          * Allowed HTML tags and attributes for wp_kses
-         * 
+         *
          * @var array<string, array<string, mixed>> $allowed_html
          */
         $allowed_html = [

@@ -32,7 +32,7 @@ try {
     $comblock_login->run();
 } catch (Throwable $e) {
     add_action('admin_notices', function () use ($e): void {
-        $html = sprintf('<div class="notice notice-error is-dismissible"><p>%s</p></div>',  esc_html($e->getMessage()));
+        $html = sprintf('<div class="notice notice-error is-dismissible"><p>%s</p></div>', esc_html($e->getMessage()));
         echo wp_kses_post($html);
     });
 }

@@ -14,9 +14,9 @@ class Comblock_Login_Manager
 {
     /**
      * Register the plugin shortcode with WordPress to manage authenticated access to the front office dashboard.
-     * 
+     *
      * @since 1.0.0
-     * 
+     *
      * @return void
      */
     public function register_shortcode(): void
@@ -32,11 +32,11 @@ class Comblock_Login_Manager
      * The shortcode callback handles rendering the login form.
      *
      * @since 1.0.0
-     * 
+     *
      * @example [comblock_login id="subscriber-login" class="comblock-form__login" dashboard-post-id="1" privacy-page-id="2" action="subscriber/dashboard"]
      *
      * @access protected
-     * 
+     *
      * @return void
      */
     protected function register_login_shortcode(): void
@@ -58,9 +58,9 @@ class Comblock_Login_Manager
      * The shortcode callback handles rendering the logout link.
      *
      * @since 1.0.0
-     * 
+     *
      * @example [comblock_logout id="subscriber-logout" class="comblock-form__logout"]
-     * 
+     *
      * @access protected
      *
      * @return void
@@ -166,9 +166,9 @@ class Comblock_Login_Manager
      * Destroys any active PHP sessions.
      * Retrieves, sanitizes, and validates the redirect URL.
      * Redirects to the validated URL or defaults to the home URL.
-     * 
+     *
      * @since 1.0.0
-     * 
+     *
      * @return void
      */
     public function do_logout(): void

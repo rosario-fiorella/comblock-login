@@ -12,39 +12,39 @@
  */
 class Comblock_Login_Public
 {
-	/**
-	 * Enqueue stylesheet for public side.
-	 *
-	 * @since 1.0.0
-	 * 
-	 * @return void
-	 */
-	public function enqueue_styles(): void
-	{
-		wp_enqueue_style(
-			Comblock_Login::DOMAIN,
-			plugin_dir_url(__FILE__) . 'css/comblock-login-public.css',
-			[],
-			Comblock_Login::VERSION,
-			'all'
-		);
-	}
+    /**
+     * Enqueue stylesheet for public side.
+     *
+     * @since 1.0.0
+     *
+     * @return void
+     */
+    public function enqueue_styles(): void
+    {
+        wp_enqueue_style(
+            Comblock_Login::DOMAIN,
+            plugin_dir_url(__FILE__) . 'css/comblock-login-public.css',
+            [],
+            Comblock_Login::VERSION,
+            'all'
+        );
+    }
 
-	/**
-	 * Enqueue scripts for public side.
-	 *
-	 * @since 1.0.0
-	 * 
-	 * @return void
-	 */
-	public function enqueue_scripts(): void
-	{
-		wp_enqueue_script(
-			Comblock_Login::DOMAIN,
-			plugin_dir_url(__FILE__) . 'js/comblock-login-public.js',
-			['jquery'],
-			Comblock_Login::VERSION,
-			false
-		);
-	}
+    /**
+     * Enqueue scripts for public side.
+     *
+     * @since 1.0.0
+     *
+     * @return void
+     */
+    public function enqueue_scripts(): void
+    {
+        wp_enqueue_script(
+            Comblock_Login::DOMAIN,
+            plugin_dir_url(__FILE__) . 'js/comblock-login-public.js',
+            ['jquery'],
+            Comblock_Login::VERSION,
+            false
+        );
+    }
 }
