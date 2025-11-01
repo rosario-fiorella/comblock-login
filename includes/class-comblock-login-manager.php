@@ -86,7 +86,7 @@ class Comblock_Login_Manager
      *
      * @since 1.0.0
      *
-     * @example [user_info]
+     * @example [comblock_user_info]
      *
      * @access protected
      *
