@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Comblock Front-End Login\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-01 13:57+0000\n"
+"POT-Creation-Date: 2025-11-01 22:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -28,7 +28,7 @@ msgstr ""
 msgid "All Dashboard"
 msgstr ""
 
-#: templates/login.php:132
+#: templates/template-shortcode-auth-login.php:132
 msgid "Click here"
 msgstr ""
 
@@ -47,11 +47,11 @@ msgstr ""
 msgid "Edit Dashboard"
 msgstr ""
 
-#: templates/login.php:129
+#: templates/template-shortcode-auth-login.php:129
 msgid "Enter your password"
 msgstr ""
 
-#: templates/login.php:126
+#: templates/template-shortcode-auth-login.php:126
 msgid "Enter your username"
 msgstr ""
 
@@ -67,7 +67,7 @@ msgstr ""
 msgid "Error: hook name cannot be empty"
 msgstr ""
 
-#: includes/class-comblock-login-manager.php:106
+#: includes/class-comblock-login-manager.php:159
 msgid "Error: Invalid nonce."
 msgstr ""
 
@@ -75,37 +75,37 @@ msgstr ""
 msgid "Error: priority must be a positive integer"
 msgstr ""
 
-#: templates/login.php:55
+#: templates/template-shortcode-auth-login.php:55
 msgid ""
 "Error: The \"action\" shortcode attribute is required and must be valid."
 msgstr ""
 
-#: templates/login.php:51
+#: templates/template-shortcode-auth-login.php:51
 msgid "Error: The \"class\" shortcode attribute is required and must be valid."
 msgstr ""
 
-#: templates/login.php:63
+#: templates/template-shortcode-auth-login.php:63
 msgid ""
 "Error: The \"dashboard-post-id\" shortcode attribute is required and must be "
 "valid."
 msgstr ""
 
-#: templates/login.php:47
+#: templates/template-shortcode-auth-login.php:47
 msgid "Error: The \"id\" shortcode attribute is required and must be valid."
 msgstr ""
 
-#: templates/login.php:59
+#: templates/template-shortcode-auth-login.php:59
 msgid ""
 "Error: The \"method\" shortcode attribute is required and must be valid."
 msgstr ""
 
-#: templates/login.php:67
+#: templates/template-shortcode-auth-login.php:67
 msgid ""
 "Error: The \"privacy-page-id\" shortcode attribute is required and must be "
 "valid."
 msgstr ""
 
-#: templates/login.php:131
+#: templates/template-shortcode-auth-login.php:131
 msgid ""
 "For more information about the processing of personal data, please consult "
 "the Privacy Policy."
@@ -119,15 +119,19 @@ msgstr ""
 msgid "https://github.com/rosario-fiorella/wordpress-comblock-login/"
 msgstr ""
 
-#: templates/login.php:137
+#: templates/template-shortcode-auth-login.php:137
 msgid "Log In"
 msgstr ""
 
-#: templates/login.php:124
+#: templates/template-shortcode-auth-disconnection.php:65
+msgid "Log out of all devices"
+msgstr ""
+
+#: templates/template-shortcode-auth-login.php:124
 msgid "Login"
 msgstr ""
 
-#: templates/logout.php:59
+#: templates/template-shortcode-auth-logout.php:59
 msgid "Logout"
 msgstr ""
 
@@ -143,15 +147,15 @@ msgstr ""
 msgid "No dashboard found in Trash"
 msgstr ""
 
-#: templates/login.php:128
+#: templates/template-shortcode-auth-login.php:128
 msgid "Password"
 msgstr ""
 
-#: templates/login.php:130
+#: templates/template-shortcode-auth-login.php:130
 msgid "Remember me"
 msgstr ""
 
-#: templates/login.php:136
+#: templates/template-shortcode-auth-login.php:136
 msgid "Reset"
 msgstr ""
 
@@ -185,7 +189,11 @@ msgid ""
 "can access it."
 msgstr ""
 
-#: templates/login.php:125
+#: templates/template-shortcode-user-info.php:53
+msgid "User info"
+msgstr ""
+
+#: templates/template-shortcode-auth-login.php:125
 msgid "Username"
 msgstr ""
 
