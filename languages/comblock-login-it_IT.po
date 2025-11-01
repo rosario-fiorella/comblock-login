@@ -1,0 +1,215 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Comblock Front-End Login\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-01 13:48+0000\n"
+"PO-Revision-Date: 2025-11-01 13:55+0000\n"
+"Last-Translator: \n"
+"Language-Team: Italiano\n"
+"Language: it_IT\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.8.0; wp-6.8.3; php-8.3.26\n"
+"X-Domain: comblock-login"
+
+#: includes/class-comblock-login-dashboard.php:22
+msgid "Add New"
+msgstr "Aggiungi nuovo"
+
+#: includes/class-comblock-login-dashboard.php:23
+msgid "Add New Dashboard"
+msgstr "Aggiungi dashbaord"
+
+#: includes/class-comblock-login-dashboard.php:30
+msgid "All Dashboard"
+msgstr "Tutte le dashboard"
+
+#: templates/login.php:132
+msgid "Click here"
+msgstr "Clicca qui"
+
+#. Name of the plugin
+msgid "Comblock Front-End Login"
+msgstr "Comblock Front-End Login"
+
+#: includes/class-comblock-login-dashboard.php:20
+#: includes/class-comblock-login-dashboard.php:21
+#: includes/class-comblock-login-dashboard.php:31
+#: includes/class-comblock-login-dashboard.php:32
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: includes/class-comblock-login-dashboard.php:24
+msgid "Edit Dashboard"
+msgstr "Edita Dashboard"
+
+#: templates/login.php:129
+msgid "Enter your password"
+msgstr "Inserisci la password"
+
+#: templates/login.php:126
+msgid "Enter your username"
+msgstr "Inserisci il nome utente"
+
+#: includes/class-comblock-login-loader.php:113
+msgid "Error: accepted_args must be a positive integer"
+msgstr "Errore: accepted_args deve essere un numero intero positivo"
+
+#: includes/class-comblock-login-loader.php:105
+msgid "Error: callback method does not exist on component"
+msgstr "Errore: il metodo di callback non esiste sul componente"
+
+#: includes/class-comblock-login-loader.php:101
+msgid "Error: hook name cannot be empty"
+msgstr "Errore: il nome del gancio non può essere vuoto"
+
+#: includes/class-comblock-login-manager.php:106
+msgid "Error: Invalid nonce."
+msgstr "Errore: nonce non valido."
+
+#: includes/class-comblock-login-loader.php:109
+msgid "Error: priority must be a positive integer"
+msgstr "Errore: la priorità deve essere un numero intero positivo"
+
+#: templates/login.php:55
+msgid ""
+"Error: The \"action\" shortcode attribute is required and must be valid."
+msgstr ""
+"Errore: l'attributo shortcode \"azione\" è obbligatorio e deve essere valido."
+
+#: templates/login.php:51
+msgid "Error: The \"class\" shortcode attribute is required and must be valid."
+msgstr ""
+"Errore: l'attributo shortcode \"class\" è obbligatorio e deve essere valido."
+
+#: templates/login.php:63
+msgid ""
+"Error: The \"dashboard-post-id\" shortcode attribute is required and must be "
+"valid."
+msgstr ""
+"Errore: l'attributo shortcode \"dashboard-post-id\" è obbligatorio e deve "
+"essere valido."
+
+#: templates/login.php:47
+msgid "Error: The \"id\" shortcode attribute is required and must be valid."
+msgstr ""
+"Errore: l'attributo shortcode \"id\" è obbligatorio e deve essere valido."
+
+#: templates/login.php:59
+msgid ""
+"Error: The \"method\" shortcode attribute is required and must be valid."
+msgstr ""
+"Errore: l'attributo shortcode \"metodo\" è obbligatorio e deve essere valido."
+
+#: templates/login.php:67
+msgid ""
+"Error: The \"privacy-page-id\" shortcode attribute is required and must be "
+"valid."
+msgstr ""
+"Errore: l'attributo shortcode \"privacy-page-id\" è obbligatorio e deve "
+"essere valido."
+
+#: templates/login.php:131
+msgid ""
+"For more information about the processing of personal data, please consult "
+"the Privacy Policy."
+msgstr ""
+"Per maggiori informazioni sul trattamento dei dati personali, consultare "
+"l'Informativa sulla Privacy."
+
+#. Author URI of the plugin
+msgid "https://github.com/rosario-fiorella/"
+msgstr "https://github.com/rosario-fiorella/"
+
+#. URI of the plugin
+msgid "https://github.com/rosario-fiorella/wordpress-comblock-login/"
+msgstr "https://github.com/rosario-fiorella/wordpress-comblock-login/"
+
+#: templates/login.php:137
+msgid "Log In"
+msgstr "Log In"
+
+#: templates/login.php:124
+msgid "Login"
+msgstr "Login"
+
+#: templates/logout.php:59
+msgid "Logout"
+msgstr "Logout"
+
+#: includes/class-comblock-login-dashboard.php:25
+msgid "New Dashboard"
+msgstr "Nuova Dashboard"
+
+#: includes/class-comblock-login-dashboard.php:28
+msgid "No dashboard found"
+msgstr "Nessuna dashboard trovata"
+
+#: includes/class-comblock-login-dashboard.php:29
+msgid "No dashboard found in Trash"
+msgstr "Nessuna dashboard trovata nel Cestino"
+
+#: templates/login.php:128
+msgid "Password"
+msgstr "Password"
+
+#: templates/login.php:130
+msgid "Remember me"
+msgstr "Ricordati di me"
+
+#: templates/login.php:136
+msgid "Reset"
+msgstr "Reset"
+
+#. Author of the plugin
+msgid "Rosario Fiorella"
+msgstr "Rosario Fiorella"
+
+#: includes/class-comblock-login-dashboard.php:27
+msgid "Search Dashboard"
+msgstr "Pannello di ricerca"
+
+#: includes/class-comblock-login-dashboard.php:154
+msgid "Select a page"
+msgstr "Seleziona una pagina"
+
+#: includes/class-comblock-login-dashboard.php:59
+msgid "Select Login Page"
+msgstr "Seleziona Pagina di accesso"
+
+#: includes/class-comblock-login-dashboard.php:58
+msgid "Select Roles"
+msgstr "Seleziona Ruoli"
+
+#: includes/class-comblock-login-dashboard.php:174
+msgid "Select the login page that allows you to access this dashboard."
+msgstr ""
+"Seleziona la pagina di accesso che ti consente di accedere a questa "
+"dashboard."
+
+#: includes/class-comblock-login-dashboard.php:96
+msgid ""
+"Select the user roles that can access the dashboard. By default, all roles "
+"can access it."
+msgstr ""
+"Seleziona i ruoli utente che possono accedere alla dashboard. Per "
+"impostazione predefinita, tutti i ruoli possono accedervi."
+
+#: templates/login.php:125
+msgid "Username"
+msgstr "Username"
+
+#: includes/class-comblock-login-dashboard.php:26
+msgid "View Dashboard"
+msgstr "Visualizza dashboard"
+
+#. Description of the plugin
+msgid ""
+"WordPress plugin that allows you to authenticate users in the front-end in a "
+"reserved area ."
+msgstr ""
+"Plugin di WordPress che consente di autenticare gli utenti nel front-end in "
+"un'area riservata."

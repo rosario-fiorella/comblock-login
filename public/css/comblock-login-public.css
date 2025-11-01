@@ -1,0 +1,26 @@
+.comblock-login {}
+.comblock-login__fieldset {}
+.comblock-login__legend {}
+.comblock-login__group {}
+.comblock-login__group--errors {}
+.comblock-login__label {}
+.comblock-login__input {}
+.comblock-login__group--checkbox {}
+.comblock-login__checkbox {}
+.comblock-login__label--checkbox {}
+.comblock-login__privacy-notice {}
+.comblock-login__hidden {}
+.comblock-login__actions {}
+.comblock-login__button {}
+.comblock-login__button--reset {}
+.comblock-login__button--submit {}
+
+.comblock-logout {}
+.comblock-logout__fieldset {}
+.comblock-logout__hidden {}
+.comblock-logout__actions {}
+.comblock-logout__button {}
+.comblock-logout__button--submit {}
+
+.dashicons {}
+.dashicons-exit {}
