@@ -6,9 +6,9 @@
  * This class manages the login functionality for the Comblock system.
  * Add a brief description of what this class does and its main responsibilities.
  *
+ * @since 1.0.0
  * @package wordpress-comblock-login
- * @author Rosario Fiorella
- * @version 1.0.0
+ * @subpackage wordpress-comblock-login/includes
  */
 class Comblock_Login_Manager
 {
@@ -299,7 +299,7 @@ class Comblock_Login_Manager
         $current_user = wp_get_current_user();
 
         /** * @var string[] $user_roles */
-        $user_roles = array_keys($current_user->roles);
+        $user_roles = $current_user->roles;
 
         /** * @var bool $is_logged */
         $is_logged = is_user_logged_in();
