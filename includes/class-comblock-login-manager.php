@@ -7,8 +7,8 @@
  * Add a brief description of what this class does and its main responsibilities.
  *
  * @since 1.0.0
- * @package wordpress-comblock-login
- * @subpackage wordpress-comblock-login/includes
+ * @package comblock-login
+ * @subpackage comblock-login/includes
  */
 class Comblock_Login_Manager
 {
@@ -154,8 +154,9 @@ class Comblock_Login_Manager
         wp_clear_auth_cookie();
 
         try {
-            // Verify nonce to protect against CSRF attacks
-            if (!isset($_POST['comblock_do_login_nonce']) || !wp_verify_nonce($_POST['comblock_do_login_nonce'], 'comblock_do_login')) {
+            /** * @var string $nonce */
+            $nonce = sanitize_text_field(wp_unslash($_POST['comblock_do_login_nonce']));
+            if (!wp_verify_nonce($nonce, 'comblock_do_login')) {
                 throw new InvalidArgumentException(__('Error: Invalid nonce.', 'comblock-login'));
             }
 
@@ -163,7 +164,7 @@ class Comblock_Login_Manager
             $user_login = isset($_POST['user']) ? sanitize_user(wp_unslash($_POST['user'])) : '';
 
             // Password is not sanitized since it may contain special chars; treat carefully
-            $user_password = $_POST['password'] ?? '';
+            $user_password = isset($_POST['password']) ? wp_unslash($_POST['password']) : '';
 
             // Convert rememberme checkbox to boolean
             $remember = !empty($_POST['rememberme']);
@@ -192,10 +193,13 @@ class Comblock_Login_Manager
             wp_set_auth_cookie($user->ID, $remember, is_ssl());
 
             // Get redirect URL from form input, sanitize it
-            $redirect = isset($_POST['redirect_to']) ? esc_url_raw($_POST['redirect_to']) : '';
+            $redirect = '';
+            if (isset($_POST['redirect_to'])) {
+                $redirect = esc_url_raw(wp_unslash($_POST['redirect_to']));
+            }
         } catch (Throwable $e) {
             // Save error message as a transient for showing after redirect
-            set_transient('comblock_login_errors', $e->getMessage(), 30);
+            set_transient('comblock_login_errors', esc_html($e->getMessage()), 30);
 
             // On error, redirect back to referer or fallback to home URL
             $redirect = wp_get_raw_referer() ?: '';
@@ -226,8 +230,12 @@ class Comblock_Login_Manager
      */
     public function do_logout(): void
     {
-        // Check if logout form was submitted and nonce is valid to avoid CSRF
-        if (!isset($_POST['comblock_do_logout_nonce']) || !wp_verify_nonce($_POST['comblock_do_logout_nonce'], 'comblock_do_logout')) {
+        if (!isset($_POST['comblock_do_logout_nonce'])) {
+            return;
+        }
+
+        $nonce = sanitize_text_field(wp_unslash($_POST['comblock_do_logout_nonce']));
+        if (!wp_verify_nonce($nonce, 'comblock_do_logout')) {
             return;
         }
 
@@ -309,7 +317,7 @@ class Comblock_Login_Manager
 
         // Error: Login page not configured
         if ($login_page_id === null) {
-            error_log("[Login redirect] [login page not configured for dashboard post ID] {$post->ID}");
+            Comblock_Login_Logger::log("[Login redirect] [login page not configured for dashboard post ID] {$post->ID}");
         }
 
         /** * @var string $redirect_to */
@@ -317,19 +325,19 @@ class Comblock_Login_Manager
 
         // Validate dashboard access permission
         if (!$is_logged) {
-            error_log("[Login redirect] [unauthenticated user redirected for dashboard post ID] {$post->ID}");
+            Comblock_Login_Logger::log("[Login redirect] [unauthenticated user redirected for dashboard post ID] {$post->ID}");
             wp_safe_redirect($redirect_to);
             exit;
         }
 
         if (empty($current_user->roles)) {
-            error_log("[Login redirect] [user with empty roles redirected for dashboard post ID] {$post->ID}");
+            Comblock_Login_Logger::log("[Login redirect] [user with empty roles redirected for dashboard post ID] {$post->ID}");
             wp_safe_redirect($redirect_to);
             exit;
         }
 
         if (!empty($allowed_user_roles) && !array_intersect($allowed_user_roles, $user_roles)) {
-            error_log("[Login redirect] [user role not allowed redirected for dashboard post ID] {$post->ID}, user ID: {$current_user->ID}");
+            Comblock_Login_Logger::log("[Login redirect] [user role not allowed redirected for dashboard post ID] {$post->ID}, user ID: {$current_user->ID}");
             wp_safe_redirect($redirect_to);
             exit;
         }
@@ -348,7 +356,12 @@ class Comblock_Login_Manager
      */
     public function handle_logout_all_devices(): void
     {
-        if (!isset($_POST['logout_all_devices_nonce']) || !wp_verify_nonce($_POST['logout_all_devices_nonce'], 'logout_all_devices_action')) {
+        if (!isset($_POST['logout_all_devices_nonce'])) {
+            return;
+        }
+
+        $nonce = sanitize_text_field(wp_unslash($_POST['logout_all_devices_nonce']));
+        if (!wp_verify_nonce($nonce, 'logout_all_devices_action')) {
             return;
         }
 

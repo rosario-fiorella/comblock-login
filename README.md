@@ -1,18 +1,20 @@
 # Comblock Front-End Login
 
-Contributors: Rosario Fiorella  
-Donate link:   
-Tags: login, user management, dashboard, shortcode, security  
-Requires at least: 6.8  
-Tested up to: 6.8.3  
-Stable tag: 1.0.0  
-Requires PHP: 8.3  
-License: MIT License  
-License URI: https://opensource.org/license/MIT  
+Contributors: Rosario Fiorella
+Donate link:
+Tags: login, user management, dashboard, shortcode, security
+Requires at least: 6.8
+Tested up to: 6.8
+Stable tag: 1.0.0
+Requires PHP: 8.3
+License: GPL-2.0+
+License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
 ## Description
 
-The Comblock Front-End Login plugin manages secure and personalized access, allowing controlled access to multiple dashboards based on user roles.
+The Comblock Front-End Login plugin implements a complete and secure authentication system for WordPress. Through dedicated shortcodes, you can easily insert login and logout forms, user information displays, and the option to log out of all active sessions on your site's content. The login process is strictly managed: user-entered data is sanitized, security is ensured through nonce verification to prevent CSRF attacks, and authentication is performed using native WordPress functions, with support for secure session storage and cookie management.
+
+Logout not only allows you to securely end the current session, but also offers the advanced global logout feature, which ends all active user sessions on all devices, increasing security in case of compromise or accidental sharing of credentials. Custom dashboards, based on dedicated post types, are protected by access controls that limit visibility to authorized users only, redirecting other users to configured login pages, with failed attempts logged to improve security monitoring.
 
 ## Features
 

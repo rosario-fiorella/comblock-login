@@ -8,8 +8,8 @@
  * run function to execute the list of actions and filters.
  *
  * @since 1.0.0
- * @package wordpress-comblock-login
- * @subpackage wordpress-comblock-login/includes
+ * @package comblock-login
+ * @subpackage comblock-login/includes
  */
 class Comblock_Login_Loader
 {
@@ -97,19 +97,19 @@ class Comblock_Login_Loader
     private function add(array $hooks, string $hook, object $component, string $callback, int $priority, int $accepted_args): array
     {
         if (empty($hook)) {
-            throw new InvalidArgumentException(__('Error: hook name cannot be empty', 'comblock-login'));
+            throw new InvalidArgumentException(esc_html__('Error: hook name cannot be empty', 'comblock-login'));
         }
 
         if (!method_exists($component, $callback)) {
-            throw new InvalidArgumentException(__('Error: callback method does not exist on component', 'comblock-login'));
+            throw new InvalidArgumentException(esc_html__('Error: callback method does not exist on component', 'comblock-login'));
         }
 
         if ($priority < 1) {
-            throw new InvalidArgumentException(__('Error: priority must be a positive integer', 'comblock-login'));
+            throw new InvalidArgumentException(esc_html__('Error: priority must be a positive integer', 'comblock-login'));
         }
 
         if ($accepted_args < 1) {
-            throw new InvalidArgumentException(__('Error: accepted_args must be a positive integer', 'comblock-login'));
+            throw new InvalidArgumentException(esc_html__('Error: accepted_args must be a positive integer', 'comblock-login'));
         }
 
         $hooks[] = [

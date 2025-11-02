@@ -4,8 +4,8 @@
  * Class for managing custom post type 'dashboard' with meta boxes
  * 
  * @since 1.0.0
- * @package wordpress-comblock-login
- * @subpackage wordpress-comblock-login/includes
+ * @package comblock-login
+ * @subpackage comblock-login/includes
  */
 class Comblock_Login_Dashboard
 {
@@ -212,13 +212,19 @@ class Comblock_Login_Dashboard
             return;
         }
 
+        if (!isset($_POST['roles_nonce'], $_POST['page_nonce'])) {
+            return;
+        }
+
         // Verify nonce for roles
-        if (!isset($_POST['roles_nonce']) || !wp_verify_nonce($_POST['roles_nonce'], 'save_roles_nonce')) {
+        $roles_nonce = sanitize_text_field(wp_unslash($_POST['roles_nonce']));
+        if (!wp_verify_nonce($roles_nonce, 'save_roles_nonce')) {
             return;
         }
 
         // Verify nonce for login page
-        if (!isset($_POST['page_nonce']) || !wp_verify_nonce($_POST['page_nonce'], 'save_page_nonce')) {
+        $page_nonce = sanitize_text_field(wp_unslash($_POST['page_nonce']));
+        if (!wp_verify_nonce($page_nonce, 'save_page_nonce')) {
             return;
         }
 
@@ -228,7 +234,11 @@ class Comblock_Login_Dashboard
         }
 
         // Save selected roles
-        $roles = isset($_POST['allowed_user_roles']) && is_array($_POST['allowed_user_roles']) ? $_POST['allowed_user_roles'] : [];
+        /** * @var array<int, string> $roles */
+        $roles = [];
+        if (isset($_POST['allowed_user_roles']) && is_array($_POST['allowed_user_roles'])) {
+            $roles = array_map('sanitize_text_field', wp_unslash($_POST['allowed_user_roles']) ?: []);
+        }
         delete_post_meta($post_id, 'allowed_user_roles');
         foreach ($roles as $role) {
             if (is_string($role)) {
@@ -237,6 +247,7 @@ class Comblock_Login_Dashboard
         }
 
         // Save selected login page
+        /** * @var int $page_id */
         $page_id = isset($_POST['login_page_id']) ? absint($_POST['login_page_id']) : 0;
         delete_post_meta($post_id, 'login_page_id');
         if ($page_id > 0 && get_post_status($page_id) === 'publish') {

@@ -6,8 +6,8 @@
  * Handles initialization, dependency loading, and hook registration.
  *
  * @since 1.0.0
- * @package wordpress-comblock-login
- * @subpackage wordpress-comblock-login/includes
+ * @package comblock-login
+ * @subpackage comblock-login/includes
  */
 class Comblock_Login
 {
@@ -53,8 +53,8 @@ class Comblock_Login
     {
         $plugin_path = plugin_dir_path(__DIR__);
 
+        require_once $plugin_path . 'includes/class-comblock-login-logger.php';
         require_once $plugin_path . 'includes/class-comblock-login-loader.php';
-        require_once $plugin_path . 'includes/class-comblock-login-i18n.php';
         require_once $plugin_path . 'includes/class-comblock-login-dashboard.php';
         require_once $plugin_path . 'includes/class-comblock-login-manager.php';
         require_once $plugin_path . 'public/class-comblock-login-public.php';
@@ -77,14 +77,12 @@ class Comblock_Login
      */
     protected function define_hooks(): void
     {
-        $i18n = new Comblock_Login_i18n();
         $manager = new Comblock_Login_Manager();
         $dashboard = new Comblock_Login_Dashboard();
         $enqueue = new Comblock_Login_Public();
 
         $this->loader->add_action('wp_enqueue_scripts', $enqueue, 'enqueue_styles');
         $this->loader->add_action('wp_enqueue_scripts', $enqueue, 'enqueue_scripts');
-        $this->loader->add_action('plugins_loaded', $i18n, 'load_plugin_textdomain');
         $this->loader->add_action('template_redirect', $manager, 'do_login');
         $this->loader->add_action('template_redirect', $manager, 'do_logout');
         $this->loader->add_action('template_redirect', $manager, 'login_redirect');

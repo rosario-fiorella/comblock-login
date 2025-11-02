@@ -3,22 +3,22 @@
 /**
  * @link              https://github.com/rosario-fiorella/wordpress-comblock-login/
  * @since             1.0.0
- * @package           wordpress-comblock-login
+ * @package           comblock-login
  * @author            Rosario Fiorella
  *
  * @wordpress-plugin
  * Plugin Name:       Comblock Front-End Login
  * Plugin URI:        https://github.com/rosario-fiorella/wordpress-comblock-login/
- * Description:       WordPress plugin that allows you to authenticate users in the front-end in a reserved area.
+ * Description:       The Comblock Front-End Login plugin manages secure and personalized access, allowing controlled access to multiple dashboards based on user roles.
  * Version:           1.0.0
- * Requires at least: 6.8.3
+ * Requires at least: 6.8
  * Requires PHP:      8.3
  * Author:            Rosario Fiorella
  * Author URI:        https://github.com/rosario-fiorella/
  * Text Domain:       comblock-login
  * Domain Path:       /languages
- * License:           MIT
- * License URI:       https://opensource.org/licenses/MIT
+ * License:           GPL-2.0+
+ * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  */
 
 if (!defined('WPINC')) {

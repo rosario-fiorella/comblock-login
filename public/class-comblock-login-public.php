@@ -6,8 +6,8 @@
  * This class is responsible for enqueueing the CSS and JS files
  * required on the frontend of the WordPress site.
  *
- * @package wordpress-comblock-login
- * @subpackage wordpress-comblock-login/public
+ * @package comblock-login
+ * @subpackage comblock-login/public
  * @since 1.0.0
  */
 class Comblock_Login_Public
