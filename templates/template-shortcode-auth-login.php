@@ -19,8 +19,6 @@ function comblock_login_shortcode_template(array $attributes = []): string
     $defaults = [
         'id' => '',
         'class' => '',
-        'action' => '',
-        'method' => 'post',
         'dashboard-post-id' => '',
         'privacy-page-id' => ''
     ];
@@ -31,13 +29,12 @@ function comblock_login_shortcode_template(array $attributes = []): string
     // Sanitize inputs
     $id = sanitize_key($atts['id']);
     $class = sanitize_html_class($atts['class']);
-    $method = sanitize_key($atts['method']);
+    $method = 'post';
     $dashboard_id = absint($atts['dashboard-post-id']);
     $policy_id = absint($atts['privacy-page-id']);
-    $action = sanitize_url($atts['action']);
     $dashboard_url = get_permalink($dashboard_id) ?: '';
     $policy_url = get_permalink($policy_id) ?: '';
-    $action_url = esc_url($action) ?: '';
+    $action_url = '';
 
     // Error message template
     $error_template = '<div class="notice notice-error inline"><p>%s</p></div>';
@@ -49,14 +46,6 @@ function comblock_login_shortcode_template(array $attributes = []): string
 
     if ($class && '' === trim($class)) {
         return sprintf($error_template, esc_html__('Error: The "class" shortcode attribute is required and must be valid.', 'comblock-login'));
-    }
-
-    if ($action && !$action_url) {
-        return sprintf($error_template, esc_html__('Error: The "action" shortcode attribute is required and must be valid.', 'comblock-login'));
-    }
-
-    if (!in_array($method, ['post'], true)) {
-        return sprintf($error_template, esc_html__('Error: The "method" shortcode attribute is required and must be valid.', 'comblock-login'));
     }
 
     if ($dashboard_id < 1 || !$dashboard_url) {

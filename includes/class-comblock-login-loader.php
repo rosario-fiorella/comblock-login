@@ -10,7 +10,6 @@
  * @since 1.0.0
  * @package wordpress-comblock-login
  * @subpackage wordpress-comblock-login/includes
- * @author Rosario Fiorella
  */
 class Comblock_Login_Loader
 {

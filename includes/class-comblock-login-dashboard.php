@@ -2,6 +2,10 @@
 
 /**
  * Class for managing custom post type 'dashboard' with meta boxes
+ * 
+ * @since 1.0.0
+ * @package wordpress-comblock-login
+ * @subpackage wordpress-comblock-login/includes
  */
 class Comblock_Login_Dashboard
 {
