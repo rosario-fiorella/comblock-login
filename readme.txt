@@ -1,6 +1,6 @@
 === Plugin Name ===
 Comblock Front-End Login
-Contributors: Rosario Fiorella
+Contributors: wprosario
 Donate link: 
 Tags: login, user management, dashboard, shortcode, security
 Requires at least: 6.8
@@ -58,11 +58,8 @@ The plugin implements the following security mechanisms:
 == Screenshots ==
 
 1. Login form with shortcode
-assets/screenshot-1.png
 2. Editing Front-end dashboard with role-controlled access
-assets/screenshot-2.png
 3. Page with user information and logout option from all devices
-assets/screenshot-3.png
 
 == Changelog ==
 
