@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Comblock Front-End Login\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-01 13:48+0000\n"
-"PO-Revision-Date: 2025-11-01 22:04+0000\n"
+"PO-Revision-Date: 2025-11-17 10:19+0000\n"
 "Last-Translator: \n"
 "Language-Team: Italiano\n"
 "Language: it_IT\n"
@@ -15,77 +15,71 @@ msgstr ""
 "X-Loco-Version: 2.8.0; wp-6.8.3; php-8.3.26\n"
 "X-Domain: comblock-login"
 
-#: includes/class-comblock-login-dashboard.php:22
+#: includes/class-comblock-login-dashboard.php:26
 msgid "Add New"
 msgstr "Aggiungi nuovo"
 
-#: includes/class-comblock-login-dashboard.php:23
+#: includes/class-comblock-login-dashboard.php:27
 msgid "Add New Dashboard"
 msgstr "Aggiungi dashbaord"
 
-#: includes/class-comblock-login-dashboard.php:30
+#: includes/class-comblock-login-dashboard.php:34
 msgid "All Dashboard"
 msgstr "Tutte le dashboard"
 
-#: templates/template-shortcode-auth-login.php:132
+#: templates/template-shortcode-auth-login.php:121
 msgid "Click here"
 msgstr "Clicca qui"
 
 #. Name of the plugin
-msgid "Comblock Front-End Login"
-msgstr "Comblock Front-End Login"
+msgid "Comblock Login"
+msgstr "Comblock Login"
 
-#: includes/class-comblock-login-dashboard.php:20
-#: includes/class-comblock-login-dashboard.php:21
-#: includes/class-comblock-login-dashboard.php:31
-#: includes/class-comblock-login-dashboard.php:32
+#: includes/class-comblock-login-dashboard.php:24
+#: includes/class-comblock-login-dashboard.php:25
+#: includes/class-comblock-login-dashboard.php:35
+#: includes/class-comblock-login-dashboard.php:36
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: includes/class-comblock-login-dashboard.php:24
+#: includes/class-comblock-login-dashboard.php:28
 msgid "Edit Dashboard"
 msgstr "Edita Dashboard"
 
-#: templates/template-shortcode-auth-login.php:129
+#: templates/template-shortcode-auth-login.php:118
 msgid "Enter your password"
 msgstr "Inserisci la password"
 
-#: templates/template-shortcode-auth-login.php:126
+#: templates/template-shortcode-auth-login.php:115
 msgid "Enter your username"
 msgstr "Inserisci il nome utente"
 
-#: includes/class-comblock-login-loader.php:113
+#: includes/class-comblock-login-loader.php:112
 msgid "Error: accepted_args must be a positive integer"
 msgstr "Errore: accepted_args deve essere un numero intero positivo"
 
-#: includes/class-comblock-login-loader.php:105
+#: includes/class-comblock-login-loader.php:104
 msgid "Error: callback method does not exist on component"
 msgstr "Errore: il metodo di callback non esiste sul componente"
 
-#: includes/class-comblock-login-loader.php:101
+#: includes/class-comblock-login-loader.php:100
 msgid "Error: hook name cannot be empty"
 msgstr "Errore: il nome del gancio non può essere vuoto"
 
-#: includes/class-comblock-login-manager.php:159
+#: includes/class-comblock-login-manager.php:160
 msgid "Error: Invalid nonce."
 msgstr "Errore: nonce non valido."
 
-#: includes/class-comblock-login-loader.php:109
+#: includes/class-comblock-login-loader.php:108
 msgid "Error: priority must be a positive integer"
 msgstr "Errore: la priorità deve essere un numero intero positivo"
 
-#: templates/template-shortcode-auth-login.php:55
-msgid ""
-"Error: The \"action\" shortcode attribute is required and must be valid."
-msgstr ""
-"Errore: l'attributo shortcode \"azione\" è obbligatorio e deve essere valido."
-
-#: templates/template-shortcode-auth-login.php:51
+#: templates/template-shortcode-auth-login.php:48
 msgid "Error: The \"class\" shortcode attribute is required and must be valid."
 msgstr ""
 "Errore: l'attributo shortcode \"class\" è obbligatorio e deve essere valido."
 
-#: templates/template-shortcode-auth-login.php:63
+#: templates/template-shortcode-auth-login.php:52
 msgid ""
 "Error: The \"dashboard-post-id\" shortcode attribute is required and must be "
 "valid."
@@ -93,18 +87,12 @@ msgstr ""
 "Errore: l'attributo shortcode \"dashboard-post-id\" è obbligatorio e deve "
 "essere valido."
 
-#: templates/template-shortcode-auth-login.php:47
+#: templates/template-shortcode-auth-login.php:44
 msgid "Error: The \"id\" shortcode attribute is required and must be valid."
 msgstr ""
 "Errore: l'attributo shortcode \"id\" è obbligatorio e deve essere valido."
 
-#: templates/template-shortcode-auth-login.php:59
-msgid ""
-"Error: The \"method\" shortcode attribute is required and must be valid."
-msgstr ""
-"Errore: l'attributo shortcode \"metodo\" è obbligatorio e deve essere valido."
-
-#: templates/template-shortcode-auth-login.php:67
+#: templates/template-shortcode-auth-login.php:56
 msgid ""
 "Error: The \"privacy-page-id\" shortcode attribute is required and must be "
 "valid."
@@ -112,7 +100,7 @@ msgstr ""
 "Errore: l'attributo shortcode \"privacy-page-id\" è obbligatorio e deve "
 "essere valido."
 
-#: templates/template-shortcode-auth-login.php:131
+#: templates/template-shortcode-auth-login.php:120
 msgid ""
 "For more information about the processing of personal data, please consult "
 "the Privacy Policy."
@@ -120,15 +108,16 @@ msgstr ""
 "Per maggiori informazioni sul trattamento dei dati personali, consultare "
 "l'Informativa sulla Privacy."
 
-#. Author URI of the plugin
-msgid "https://github.com/rosario-fiorella/"
-msgstr "https://github.com/rosario-fiorella/"
-
 #. URI of the plugin
-msgid "https://github.com/rosario-fiorella/wordpress-comblock-login/"
-msgstr "https://github.com/rosario-fiorella/wordpress-comblock-login/"
+#| msgid "https://github.com/rosario-fiorella/wordpress-comblock-login/"
+msgid "https://github.com/rosario-fiorella/comblock-login/"
+msgstr "https://github.com/rosario-fiorella/comblock-login/"
 
-#: templates/template-shortcode-auth-login.php:137
+#. Author URI of the plugin
+msgid "https://profiles.wordpress.org/wprosario"
+msgstr "https://profiles.wordpress.org/wprosario"
+
+#: templates/template-shortcode-auth-login.php:126
 msgid "Log In"
 msgstr "Log In"
 
@@ -136,7 +125,7 @@ msgstr "Log In"
 msgid "Log out of all devices"
 msgstr "Disconnetti da tutti i dispositivi"
 
-#: templates/template-shortcode-auth-login.php:124
+#: templates/template-shortcode-auth-login.php:113
 msgid "Login"
 msgstr "Login"
 
@@ -144,27 +133,27 @@ msgstr "Login"
 msgid "Logout"
 msgstr "Logout"
 
-#: includes/class-comblock-login-dashboard.php:25
+#: includes/class-comblock-login-dashboard.php:29
 msgid "New Dashboard"
 msgstr "Nuova Dashboard"
 
-#: includes/class-comblock-login-dashboard.php:28
+#: includes/class-comblock-login-dashboard.php:32
 msgid "No dashboard found"
 msgstr "Nessuna dashboard trovata"
 
-#: includes/class-comblock-login-dashboard.php:29
+#: includes/class-comblock-login-dashboard.php:33
 msgid "No dashboard found in Trash"
 msgstr "Nessuna dashboard trovata nel Cestino"
 
-#: templates/template-shortcode-auth-login.php:128
+#: templates/template-shortcode-auth-login.php:117
 msgid "Password"
 msgstr "Password"
 
-#: templates/template-shortcode-auth-login.php:130
+#: templates/template-shortcode-auth-login.php:119
 msgid "Remember me"
 msgstr "Ricordati di me"
 
-#: templates/template-shortcode-auth-login.php:136
+#: templates/template-shortcode-auth-login.php:125
 msgid "Reset"
 msgstr "Reset"
 
@@ -172,29 +161,29 @@ msgstr "Reset"
 msgid "Rosario Fiorella"
 msgstr "Rosario Fiorella"
 
-#: includes/class-comblock-login-dashboard.php:27
+#: includes/class-comblock-login-dashboard.php:31
 msgid "Search Dashboard"
 msgstr "Pannello di ricerca"
 
-#: includes/class-comblock-login-dashboard.php:154
+#: includes/class-comblock-login-dashboard.php:158
 msgid "Select a page"
 msgstr "Seleziona una pagina"
 
-#: includes/class-comblock-login-dashboard.php:59
+#: includes/class-comblock-login-dashboard.php:63
 msgid "Select Login Page"
 msgstr "Seleziona Pagina di accesso"
 
-#: includes/class-comblock-login-dashboard.php:58
+#: includes/class-comblock-login-dashboard.php:62
 msgid "Select Roles"
 msgstr "Seleziona Ruoli"
 
-#: includes/class-comblock-login-dashboard.php:174
+#: includes/class-comblock-login-dashboard.php:178
 msgid "Select the login page that allows you to access this dashboard."
 msgstr ""
 "Seleziona la pagina di accesso che ti consente di accedere a questa "
 "dashboard."
 
-#: includes/class-comblock-login-dashboard.php:96
+#: includes/class-comblock-login-dashboard.php:100
 msgid ""
 "Select the user roles that can access the dashboard. By default, all roles "
 "can access it."
@@ -202,22 +191,24 @@ msgstr ""
 "Seleziona i ruoli utente che possono accedere alla dashboard. Per "
 "impostazione predefinita, tutti i ruoli possono accedervi."
 
+#. Description of the plugin
+msgid ""
+"The Comblock Login plugin manages secure and customized login on the "
+"frontend, allowing controlled access to multiple dashboards based on user "
+"roles."
+msgstr ""
+"Il plugin Comblock Login gestisce l'accesso sicuro e personalizzato sul "
+"frontend, consentendo un accesso controllato a più dashboard in base ai "
+"ruoli utente."
+
 #: templates/template-shortcode-user-info.php:53
 msgid "User info"
 msgstr "Informazioni sull'utente loggato"
 
-#: templates/template-shortcode-auth-login.php:125
+#: templates/template-shortcode-auth-login.php:114
 msgid "Username"
 msgstr "Username"
 
-#: includes/class-comblock-login-dashboard.php:26
+#: includes/class-comblock-login-dashboard.php:30
 msgid "View Dashboard"
 msgstr "Visualizza dashboard"
-
-#. Description of the plugin
-msgid ""
-"WordPress plugin that allows you to authenticate users in the front-end in a "
-"reserved area ."
-msgstr ""
-"Plugin di WordPress che consente di autenticare gli utenti nel front-end in "
-"un'area riservata."

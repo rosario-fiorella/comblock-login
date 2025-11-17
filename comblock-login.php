@@ -1,20 +1,22 @@
 <?php
 
 /**
- * @link              https://github.com/rosario-fiorella/wordpress-comblock-login/
- * @since             1.0.0
  * @package           comblock-login
  * @author            Rosario Fiorella
+ * @link              https://github.com/rosario-fiorella/comblock-login/
+ * @link              https://profiles.wordpress.org/wprosario/
+ * @since             1.0.0
  *
  * @wordpress-plugin
- * Plugin Name:       Comblock Front-End Login
- * Plugin URI:        https://github.com/rosario-fiorella/wordpress-comblock-login/
- * Description:       The Comblock Front-End Login plugin manages secure and personalized access, allowing controlled access to multiple dashboards based on user roles.
+ * Plugin Name:       Comblock Login
+ * Plugin URI:        https://github.com/rosario-fiorella/comblock-login/
+ * Description:       The Comblock Login plugin manages secure and customized login on the frontend, allowing controlled access to multiple dashboards based on user roles.
  * Version:           1.0.0
+ *
  * Requires at least: 6.8
  * Requires PHP:      8.3
  * Author:            Rosario Fiorella
- * Author URI:        https://github.com/rosario-fiorella/
+ * Author URI:        https://profiles.wordpress.org/wprosario
  * Text Domain:       comblock-login
  * Domain Path:       /languages
  * License:           GPL-2.0+
