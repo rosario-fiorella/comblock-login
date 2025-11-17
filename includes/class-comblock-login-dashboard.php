@@ -213,7 +213,7 @@ class Comblock_Login_Dashboard
         }
 
         // Verify nonce for roles
-        if (!isset($_POST['roles_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['roles_nonce']), 'save_roles_nonce'))) {
+        if (!isset($_POST['roles_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['roles_nonce'])), 'save_roles_nonce')) {
             return;
         }
 
