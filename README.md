@@ -1,14 +1,19 @@
 # Comblock Front-End Login
 
-Contributors: Rosario Fiorella
-Donate link:
-Tags: login, user management, dashboard, shortcode, security
-Requires at least: 6.8
-Tested up to: 6.8
-Stable tag: 1.0.0
-Requires PHP: 8.3
-License: GPL-2.0+
-License URI: http://www.gnu.org/licenses/gpl-2.0.txt
+[![License: GPL v2 or later](https://img.shields.io/badge/License-GPL%20v2%20or%20later-blue.svg)](http://www.gnu.org/licenses/gpl-2.0.txt)
+[![PHP Version](https://img.shields.io/badge/PHP-8.3+-green.svg)]()
+[![WordPress Version](https://img.shields.io/badge/WordPress-6.8+-blue.svg)]()
+
+Secure and personalized front-end login plugin for WordPress that allows controlled access to multiple dashboards based on user roles.
+
+## Contributing
+
+Contributions are welcome! Please open issues and submit pull requests via GitHub.
+
+## Requirements
+
+- WordPress 6.8 or higher
+- PHP 8.3 or higher
 
 ## Description
 
@@ -58,18 +63,20 @@ The plugin implements the following security mechanisms:
 
 ## Screenshots
 
-![Customizable login form with shortcode](assets/screenshot-1.png)  
-![Front-end dashboard with role-controlled access](assets/screenshot-2.png)  
-![Page with user information and logout option from all devices](assets/screenshot-3.png)
+![Customizable login form with shortcode](https://github.com/user-attachments/assets/8085008a-eb64-4ad2-be58-74ca1fe0d131)  
+![Front-end dashboard with role-controlled access](https://github.com/user-attachments/assets/05907c3b-7d33-4562-baf4-f413efe63aa0)  
+![Page with user information and logout option from all devices](https://github.com/user-attachments/assets/2bb75fbc-d79c-488c-bc69-f40c3e7dfd04)
+
+### 1.0.0
+
+First stable version, introduces comprehensive authentication and authorization management features for multiple dashboards.
+
+## License
+
+This project is licensed under the GPL v2 or later - see the [LICENSE](http://www.gnu.org/licenses/gpl-2.0.txt) file for details.
 
 ## Changelog
 
 ### 1.0.0 - 2025-11-02
 
 - Initial version with login, logout, multiple dashboards, and integrated security management.
-
-## Upgrade Notice
-
-### 1.0.0
-
-First stable version, introduces comprehensive authentication and authorization management features for multiple dashboards.
