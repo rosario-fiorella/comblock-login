@@ -32,7 +32,6 @@ function comblock_login_shortcode_template(array $attributes = []): string
     $method = 'post';
     $dashboard_id = absint($atts['dashboard-post-id']);
     $policy_id = absint($atts['privacy-page-id']);
-    $dashboard_url = get_permalink($dashboard_id) ?: '';
     $policy_url = get_permalink($policy_id) ?: '';
     $action_url = '';
 
@@ -48,7 +47,7 @@ function comblock_login_shortcode_template(array $attributes = []): string
         return sprintf($error_template, esc_html__('Error: The "class" shortcode attribute is required and must be valid.', 'comblock-login'));
     }
 
-    if ($dashboard_id < 1 || !$dashboard_url) {
+    if ($dashboard_id < 1) {
         return sprintf($error_template, esc_html__('Error: The "dashboard-post-id" shortcode attribute is required and must be valid.', 'comblock-login'));
     }
 
@@ -121,7 +120,7 @@ function comblock_login_shortcode_template(array $attributes = []): string
         '{policy_label}' => esc_html__('Click here', 'comblock-login'),
         '{policy_url}' => $policy_url,
         '{nonce}' => wp_nonce_field('comblock_do_login', 'comblock_do_login_nonce', true, false),
-        '{redirect_to}' => $dashboard_url,
+        '{redirect_to}' => $dashboard_id,
         '{reset_label}' => esc_html__('Reset', 'comblock-login'),
         '{submit_label}' => esc_html__('Log In', 'comblock-login')
     ];

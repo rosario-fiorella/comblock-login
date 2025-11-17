@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Comblock Front-End Login\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-01 13:48+0000\n"
-"PO-Revision-Date: 2025-11-17 10:19+0000\n"
+"PO-Revision-Date: 2025-11-17 22:10+0000\n"
 "Last-Translator: \n"
 "Language-Team: Italiano\n"
 "Language: it_IT\n"
@@ -27,7 +27,7 @@ msgstr "Aggiungi dashbaord"
 msgid "All Dashboard"
 msgstr "Tutte le dashboard"
 
-#: templates/template-shortcode-auth-login.php:121
+#: templates/template-shortcode-auth-login.php:120
 msgid "Click here"
 msgstr "Clicca qui"
 
@@ -46,11 +46,11 @@ msgstr "Dashboard"
 msgid "Edit Dashboard"
 msgstr "Edita Dashboard"
 
-#: templates/template-shortcode-auth-login.php:118
+#: templates/template-shortcode-auth-login.php:117
 msgid "Enter your password"
 msgstr "Inserisci la password"
 
-#: templates/template-shortcode-auth-login.php:115
+#: templates/template-shortcode-auth-login.php:114
 msgid "Enter your username"
 msgstr "Inserisci il nome utente"
 
@@ -62,24 +62,49 @@ msgstr "Errore: accepted_args deve essere un numero intero positivo"
 msgid "Error: callback method does not exist on component"
 msgstr "Errore: il metodo di callback non esiste sul componente"
 
+#: includes/class-comblock-login-manager.php:206
+msgid "Error: Checked capability \"read\" failed."
+msgstr "Errore: verifica della capacità \"read\" non riuscita."
+
+#: includes/class-comblock-login-manager.php:210
+msgid "Error: Checked user roles do not match allowed roles."
+msgstr ""
+"Errore: i ruoli utente controllati non corrispondono ai ruoli consentiti."
+
 #: includes/class-comblock-login-loader.php:100
 msgid "Error: hook name cannot be empty"
 msgstr "Errore: il nome del gancio non può essere vuoto"
 
-#: includes/class-comblock-login-manager.php:160
+#: includes/class-comblock-login-manager.php:165
 msgid "Error: Invalid nonce."
 msgstr "Errore: nonce non valido."
+
+#: includes/class-comblock-login-manager.php:187
+msgid "Error: Invalid redirect URL."
+msgstr "Errore: URL di reindirizzamento non valido."
+
+#: includes/class-comblock-login-manager.php:202
+msgid "Error: Invalid username."
+msgstr "Errore: nome utente non valido."
+
+#: includes/class-comblock-login-manager.php:169
+msgid "Error: No user roles defined in the system."
+msgstr "Errore: nessun ruolo utente definito nel sistema."
 
 #: includes/class-comblock-login-loader.php:108
 msgid "Error: priority must be a positive integer"
 msgstr "Errore: la priorità deve essere un numero intero positivo"
 
-#: templates/template-shortcode-auth-login.php:48
+#: includes/class-comblock-login-manager.php:192
+msgid "Error: Redirect URL does not point to a valid dashboard."
+msgstr "Errore: l'URL di reindirizzamento non punta a una dashboard valida."
+
+#: templates/template-shortcode-auth-login.php:47
 msgid "Error: The \"class\" shortcode attribute is required and must be valid."
 msgstr ""
 "Errore: l'attributo shortcode \"class\" è obbligatorio e deve essere valido."
 
-#: templates/template-shortcode-auth-login.php:52
+#: templates/template-shortcode-auth-login.php:51
 msgid ""
 "Error: The \"dashboard-post-id\" shortcode attribute is required and must be "
 "valid."
@@ -87,12 +112,12 @@ msgstr ""
 "Errore: l'attributo shortcode \"dashboard-post-id\" è obbligatorio e deve "
 "essere valido."
 
-#: templates/template-shortcode-auth-login.php:44
+#: templates/template-shortcode-auth-login.php:43
 msgid "Error: The \"id\" shortcode attribute is required and must be valid."
 msgstr ""
 "Errore: l'attributo shortcode \"id\" è obbligatorio e deve essere valido."
 
-#: templates/template-shortcode-auth-login.php:56
+#: templates/template-shortcode-auth-login.php:55
 msgid ""
 "Error: The \"privacy-page-id\" shortcode attribute is required and must be "
 "valid."
@@ -100,7 +125,13 @@ msgstr ""
 "Errore: l'attributo shortcode \"privacy-page-id\" è obbligatorio e deve "
 "essere valido."
 
-#: templates/template-shortcode-auth-login.php:120
+#: includes/class-comblock-login-manager.php:241
+msgid "Error: The current user does not have permission to access this site."
+msgstr ""
+"Errore: l'utente corrente non dispone dei permessi necessari per accedere a "
+"questo sito."
+
+#: templates/template-shortcode-auth-login.php:119
 msgid ""
 "For more information about the processing of personal data, please consult "
 "the Privacy Policy."
@@ -117,7 +148,7 @@ msgstr "https://github.com/rosario-fiorella/comblock-login/"
 msgid "https://profiles.wordpress.org/wprosario"
 msgstr "https://profiles.wordpress.org/wprosario"
 
-#: templates/template-shortcode-auth-login.php:126
+#: templates/template-shortcode-auth-login.php:125
 msgid "Log In"
 msgstr "Log In"
 
@@ -125,7 +156,7 @@ msgstr "Log In"
 msgid "Log out of all devices"
 msgstr "Disconnetti da tutti i dispositivi"
 
-#: templates/template-shortcode-auth-login.php:113
+#: templates/template-shortcode-auth-login.php:112
 msgid "Login"
 msgstr "Login"
 
@@ -145,15 +176,15 @@ msgstr "Nessuna dashboard trovata"
 msgid "No dashboard found in Trash"
 msgstr "Nessuna dashboard trovata nel Cestino"
 
-#: templates/template-shortcode-auth-login.php:117
+#: templates/template-shortcode-auth-login.php:116
 msgid "Password"
 msgstr "Password"
 
-#: templates/template-shortcode-auth-login.php:119
+#: templates/template-shortcode-auth-login.php:118
 msgid "Remember me"
 msgstr "Ricordati di me"
 
-#: templates/template-shortcode-auth-login.php:125
+#: templates/template-shortcode-auth-login.php:124
 msgid "Reset"
 msgstr "Reset"
 
@@ -205,7 +236,7 @@ msgstr ""
 msgid "User info"
 msgstr "Informazioni sull'utente loggato"
 
-#: templates/template-shortcode-auth-login.php:114
+#: templates/template-shortcode-auth-login.php:113
 msgid "Username"
 msgstr "Username"
 

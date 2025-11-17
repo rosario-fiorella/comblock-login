@@ -59,8 +59,8 @@ class Comblock_Login_Dashboard
      */
     public function add_meta_boxes(): void
     {
-        add_meta_box('roles_metabox', __('Select Roles', 'comblock-login'), [$this, 'render_roles_metabox'], self::POST_TYPE_SLUG, 'side');
-        add_meta_box('login_page_metabox', __('Select Login Page', 'comblock-login'), [$this, 'render_login_page_metabox'], self::POST_TYPE_SLUG, 'side');
+        add_meta_box('roles_metabox', __('Select Roles', 'comblock-login'), [$this, 'render_metabox_roles'], self::POST_TYPE_SLUG, 'side');
+        add_meta_box('login_page_metabox', __('Select Login Page', 'comblock-login'), [$this, 'render_metabox_login_page'], self::POST_TYPE_SLUG, 'side');
     }
 
     /**
@@ -68,7 +68,7 @@ class Comblock_Login_Dashboard
      *
      * @param WP_Post $post
      */
-    public function render_roles_metabox(WP_Post $post): void
+    public function render_metabox_roles(WP_Post $post): void
     {
         /**
          * @global null|WP_Roles $wp_roles
@@ -136,7 +136,7 @@ class Comblock_Login_Dashboard
      *
      * @param WP_Post $post
      */
-    public function render_login_page_metabox(WP_Post $post): void
+    public function render_metabox_login_page(WP_Post $post): void
     {
         /** * @var string $selected_page_id */
         $selected_page_id = get_post_meta($post->ID, 'login_page_id', true) ?: '';
@@ -212,19 +212,13 @@ class Comblock_Login_Dashboard
             return;
         }
 
-        if (!isset($_POST['roles_nonce'], $_POST['page_nonce'])) {
-            return;
-        }
-
         // Verify nonce for roles
-        $roles_nonce = sanitize_text_field(wp_unslash($_POST['roles_nonce']));
-        if (!wp_verify_nonce($roles_nonce, 'save_roles_nonce')) {
+        if (!isset($_POST['roles_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['roles_nonce']), 'save_roles_nonce'))) {
             return;
         }
 
         // Verify nonce for login page
-        $page_nonce = sanitize_text_field(wp_unslash($_POST['page_nonce']));
-        if (!wp_verify_nonce($page_nonce, 'save_page_nonce')) {
+        if (!isset($_POST['page_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['page_nonce'])), 'save_page_nonce')) {
             return;
         }
 

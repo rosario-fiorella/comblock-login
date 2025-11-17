@@ -47,6 +47,10 @@ class Comblock_Login_Manager
          * @return string
          */
         $callback = function (array $attributes = []): string {
+            if (sanitize_key(wp_unslash($_SERVER['REQUEST_METHOD'])) === 'post') {
+                $this->do_login();
+            }
+
             return comblock_login_shortcode_template($attributes);
         };
 
@@ -73,6 +77,10 @@ class Comblock_Login_Manager
          * @return string
          */
         $callback = function (array $attributes = []): string {
+            if (sanitize_key(wp_unslash($_SERVER['REQUEST_METHOD'])) === 'post') {
+                $this->do_logout();
+            }
+
             return comblock_logout_shortcode_template($attributes);
         };
 
@@ -143,21 +151,22 @@ class Comblock_Login_Manager
      * @see https://developer.wordpress.org/reference/functions/wp_signon/
      *
      * @return void
+     * @throws RuntimeException If any validation or authentication step fails.
      */
     public function do_login(): void
     {
-        if (!isset($_POST['comblock_do_login_nonce'])) {
-            return;
-        }
-
-        // Clear any existing auth cookies to prevent conflicts
-        wp_clear_auth_cookie();
+        /**
+         * @global null|WP_Roles $wp_roles
+         */
+        global $wp_roles;
 
         try {
-            /** * @var string $nonce */
-            $nonce = sanitize_text_field(wp_unslash($_POST['comblock_do_login_nonce']));
-            if (!wp_verify_nonce($nonce, 'comblock_do_login')) {
-                throw new InvalidArgumentException(__('Error: Invalid nonce.', 'comblock-login'));
+            if (!isset($_POST['comblock_do_login_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['comblock_do_login_nonce'])), 'comblock_do_login')) {
+                throw new RuntimeException(__('Error: Invalid nonce.', 'comblock-login'));
+            }
+
+            if (!$wp_roles || empty($wp_roles->roles)) {
+                throw new RuntimeException(__('Error: No user roles defined in the system.', 'comblock-login'));
             }
 
             // Sanitize user login input
@@ -168,6 +177,41 @@ class Comblock_Login_Manager
 
             // Convert rememberme checkbox to boolean
             $remember = !empty($_POST['rememberme']);
+
+            // Get redirect URL from form input, sanitize it
+            $dashboard_id = isset($_POST['redirect_to']) ? absint($_POST['redirect_to']) : 0;
+
+            /** * @var WP_Post|null $dashboard_post */
+            $dashboard_post = $dashboard_id > 0 ? get_post($dashboard_id) : null;
+            if (!$dashboard_post instanceof WP_Post) {
+                throw new RuntimeException(__('Error: Invalid redirect URL.', 'comblock-login'));
+            }
+
+            // Verify the redirect points to a valid dashboard post type
+            if ($dashboard_post->post_type !== Comblock_Login_Dashboard::POST_TYPE_SLUG) {
+                throw new RuntimeException(__('Error: Redirect URL does not point to a valid dashboard.', 'comblock-login'));
+            }
+
+            /** * @var string[] $allowed_user_roles */
+            $allowed_user_roles = get_post_meta($dashboard_id, 'allowed_user_roles', false) ?: [];
+
+            /** @var WP_User|false $check_user */
+            $check_user = get_user_by('login', $user_login);
+
+            if (!$check_user instanceof WP_User) {
+                throw new RuntimeException(__('Error: Invalid username.', 'comblock-login'));
+            }
+
+            if (!$check_user->has_cap('read')) {
+                throw new RuntimeException(__('Error: Checked capability "read" failed.', 'comblock-login'));
+            }
+
+            if (!empty($allowed_user_roles) && !array_intersect($allowed_user_roles, $check_user->roles)) {
+                throw new RuntimeException(__('Error: Checked user roles do not match allowed roles.', 'comblock-login'));
+            }
+
+            // Clear any existing auth cookies to prevent conflicts
+            wp_clear_auth_cookie();
 
             /** * @var array<string, string> $credentials */
             $credentials = [
@@ -192,11 +236,13 @@ class Comblock_Login_Manager
             // Set auth cookies based on login result and remember flag
             wp_set_auth_cookie($user->ID, $remember, is_ssl());
 
-            // Get redirect URL from form input, sanitize it
-            $redirect = '';
-            if (isset($_POST['redirect_to'])) {
-                $redirect = esc_url_raw(wp_unslash($_POST['redirect_to']));
+            // Verify user has 'read' capability to access the site
+            if (!current_user_can('read')) {
+                throw new RuntimeException(__('Error: The current user does not have permission to access this site.', 'comblock-login'));
             }
+
+            /** @var string $redirect */
+            $redirect = get_permalink($dashboard_id);
         } catch (Throwable $e) {
             // Save error message as a transient for showing after redirect
             set_transient('comblock_login_errors', esc_html($e->getMessage()), 30);
@@ -230,12 +276,7 @@ class Comblock_Login_Manager
      */
     public function do_logout(): void
     {
-        if (!isset($_POST['comblock_do_logout_nonce'])) {
-            return;
-        }
-
-        $nonce = sanitize_text_field(wp_unslash($_POST['comblock_do_logout_nonce']));
-        if (!wp_verify_nonce($nonce, 'comblock_do_logout')) {
+        if (!isset($_POST['comblock_do_logout_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['comblock_do_logout_nonce'])), 'comblock_do_logout')) {
             return;
         }
 
@@ -288,11 +329,7 @@ class Comblock_Login_Manager
          */
         global $post;
 
-        if (headers_sent() || is_admin()) {
-            return;
-        }
-
-        if (!$post instanceof WP_Post) {
+        if (!$post instanceof WP_Post || headers_sent() || is_admin()) {
             return;
         }
 
@@ -313,15 +350,16 @@ class Comblock_Login_Manager
         $is_logged = is_user_logged_in();
 
         /** * @var int|null $login_page_id */
-        $login_page_id = get_post_meta($post->ID, 'login_page_id', true) ?: null;
+        $login_page_id = get_post_meta($post->ID, 'login_page_id', true) ?: 0;
+        $login_page_id = is_numeric($login_page_id) ? absint($login_page_id) : 0;
 
         // Error: Login page not configured
-        if ($login_page_id === null) {
+        if ($login_page_id < 1) {
             Comblock_Login_Logger::log("[Login redirect] [login page not configured for dashboard post ID] {$post->ID}");
         }
 
         /** * @var string $redirect_to */
-        $redirect_to = is_numeric($login_page_id) ? get_permalink($login_page_id) : home_url();
+        $redirect_to = get_permalink($login_page_id) ?: home_url();
 
         // Validate dashboard access permission
         if (!$is_logged) {
@@ -356,12 +394,7 @@ class Comblock_Login_Manager
      */
     public function handle_logout_all_devices(): void
     {
-        if (!isset($_POST['logout_all_devices_nonce'])) {
-            return;
-        }
-
-        $nonce = sanitize_text_field(wp_unslash($_POST['logout_all_devices_nonce']));
-        if (!wp_verify_nonce($nonce, 'logout_all_devices_action')) {
+        if (!isset($_POST['logout_all_devices_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['logout_all_devices_nonce'])), 'logout_all_devices_action')) {
             return;
         }
 
@@ -372,8 +405,17 @@ class Comblock_Login_Manager
         /** * @var int $user_id */
         $user_id = get_current_user_id();
 
+        // Destroy all sessions for the user
         wp_destroy_all_sessions($user_id);
+
+        // Log out user
         wp_logout();
+
+        // Destroy PHP session if started
+        if (session_id()) {
+            $_SESSION = [];
+            session_destroy();
+        }
 
         /** * @var string $redirect_to */
         $redirect_to = home_url();

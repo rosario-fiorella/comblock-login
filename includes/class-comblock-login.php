@@ -28,6 +28,8 @@ class Comblock_Login
     /**
      * Loader instance for registering hooks.
      *
+     * @access protected
+     * 
      * @var Comblock_Login_Loader
      */
     protected Comblock_Login_Loader $loader;
@@ -40,6 +42,7 @@ class Comblock_Login
     public function __construct()
     {
         $this->load_dependencies();
+
         $this->define_hooks();
     }
 
@@ -47,6 +50,9 @@ class Comblock_Login
      * Loads all plugin dependencies.
      *
      * @since 1.0.0
+     * 
+     * @access protected
+     * 
      * @return void
      */
     private function load_dependencies(): void
@@ -83,8 +89,6 @@ class Comblock_Login
 
         $this->loader->add_action('wp_enqueue_scripts', $enqueue, 'enqueue_styles');
         $this->loader->add_action('wp_enqueue_scripts', $enqueue, 'enqueue_scripts');
-        $this->loader->add_action('template_redirect', $manager, 'do_login');
-        $this->loader->add_action('template_redirect', $manager, 'do_logout');
         $this->loader->add_action('template_redirect', $manager, 'login_redirect');
         $this->loader->add_action('init', $manager, 'register_shortcode');
         $this->loader->add_action('init', $dashboard, 'register_post_type');
