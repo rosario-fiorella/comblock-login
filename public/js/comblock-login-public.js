@@ -1,10 +1,12 @@
 (function ($) {
-    'use strict';
-    $(function () {
-        //
-    });
+	'use strict';
+	$(
+		function () {
+		}
+	);
 
-    $(window).load(function () {
-        //
-    });
-})(jQuery);
+	$( window ).load(
+		function () {
+		}
+	);
+})( jQuery );
