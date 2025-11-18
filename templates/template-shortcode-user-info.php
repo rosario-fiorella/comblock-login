@@ -1,6 +1,6 @@
 <?php
 
-defined( 'WPINC' ) or exit;
+defined( 'WPINC' ) || exit;
 
 /**
  * Renders the frontend disconnection form via shortcode.
@@ -10,25 +10,24 @@ defined( 'WPINC' ) or exit;
  *
  * @since 1.0.0
  *
- * @param array<string, mixed> $attributes Shortcode attributes.
  * @return string The disconnection form HTML or error message.
  */
-function comblock_user_info_shortcode_template( array $attributes = array() ): string {
-	/** @var null|WP_Post $post */
+function comblock_user_info_shortcode_template(): string {
+	/** * @var null|WP_Post $post */
 	global $post;
 
 	if ( ! is_user_logged_in() ) {
 		return '';
 	}
 
-	if ( ! $post instanceof WP_Post || $post->post_type !== Comblock_Login_Dashboard::POST_TYPE_SLUG ) {
+	if ( ! $post instanceof WP_Post || Comblock_Login_Dashboard::POST_TYPE_SLUG !== $post->post_type ) {
 		return '';
 	}
 
-	/** @var WP_User $user */
+	/** * @var WP_User $user */
 	$user = wp_get_current_user();
 
-	/** @var string $user_roles */
+	/** * @var string $user_roles */
 	$user_roles = implode( ', ', $user->roles );
 
 	ob_start();
@@ -44,10 +43,13 @@ function comblock_user_info_shortcode_template( array $attributes = array() ): s
 	</div>
 	<?php
 
-	// Get template HTML
-	$template_html = ob_get_clean() ?: '';
+	// Get template HTML.
+	$template_html = ob_get_clean();
+	if ( false === $template_html ) {
+		$template_html = '';
+	}
 
-	// Placeholder array for template substitution
+	// Placeholder array for template substitution.
 	$placeholders = array(
 		'{user_info_label}' => esc_html__( 'User info', 'comblock-login' ),
 		'{display_name}'    => esc_html( $user->display_name ),
@@ -55,10 +57,10 @@ function comblock_user_info_shortcode_template( array $attributes = array() ): s
 		'{user_roles}'      => esc_html( $user_roles ),
 	);
 
-	// Replace placeholders with actual escaped values
+	// Replace placeholders with actual escaped values.
 	$template_html = str_replace( array_keys( $placeholders ), array_values( $placeholders ), $template_html );
 
-	// Allowed HTML tags and attributes for output sanitization
+	// Allowed HTML tags and attributes for output sanitization.
 	$allowed_html = array(
 		'legend' => array( 'class' => true ),
 		'div'    => array( 'class' => true ),

@@ -1,7 +1,9 @@
 <?php
-
 /**
  * Class for managing custom post type 'dashboard' with meta boxes
+ *
+ * This class handles the registration of a custom post type called 'dashboard',
+ * including the addition of meta boxes for role selection and login page selection.
  *
  * @since 1.0.0
  * @package comblock-login
@@ -64,12 +66,10 @@ class Comblock_Login_Dashboard {
 	/**
 	 * Render the roles checkbox list in the metabox using template placeholders and output buffering.
 	 *
-	 * @param WP_Post $post
+	 * @param WP_Post $post The current post object.
 	 */
 	public function render_metabox_roles( WP_Post $post ): void {
-		/**
-		 * @global null|WP_Roles $wp_roles
-		 */
+		/** * @global null|WP_Roles $wp_roles */
 		global $wp_roles;
 
 		if ( ! $wp_roles || empty( $wp_roles->roles ) ) {
@@ -90,20 +90,25 @@ class Comblock_Login_Dashboard {
 		 *
 		 * @var array<string, array<string, string>> $roles
 		 */
-		$roles = get_post_meta( $post->ID, 'allowed_user_roles', false ) ?: array();
+		$roles = get_post_meta( $post->ID, 'allowed_user_roles', false );
+		if ( ! is_array( $roles ) ) {
+			$roles = array();
+		}
 
 		/**
 		 * Informative text
 		 *
-		 * @var string $info
+		 * @var string $info Informative text for the roles selection.
 		 */
 		$info = __( 'Select the user roles that can access the dashboard. By default, all roles can access it.', 'comblock-login' );
 
-		/** @var string $nonce */
+		/** * @var string $nonce Nonce field for security. */
 		$nonce = wp_nonce_field( 'save_roles_nonce', 'roles_nonce', true, false );
 
 		/**
-		 * @var string $template_html
+		 * Template HTML
+		 *
+		 * @var string $template_html Template HTML for the roles checkbox list.
 		 */
 		$template_html = sprintf( '<p>%s</p><p>%s</p>', $info, $nonce );
 		foreach ( $roles_sorted as $role_slug => $role ) {
@@ -120,7 +125,7 @@ class Comblock_Login_Dashboard {
 			$template_html .= sprintf( '<p>%s</p>', $input_html );
 		}
 
-		// Allowed HTML tags and attributes for wp_kses
+		// Allowed HTML tags and attributes for wp_kses.
 		$allowed_html = array(
 			'p'     => array(),
 			'label' => array( 'for' => true ),
@@ -134,18 +139,20 @@ class Comblock_Login_Dashboard {
 			),
 		);
 
-		// Sanitize the final output
 		echo wp_kses( $template_html, $allowed_html );
 	}
 
 	/**
 	 * Render select list of pages for login page
 	 *
-	 * @param WP_Post $post
+	 * @param WP_Post $post The current post object.
 	 */
 	public function render_metabox_login_page( WP_Post $post ): void {
 		/** * @var string $selected_page_id */
-		$selected_page_id = get_post_meta( $post->ID, 'login_page_id', true ) ?: '';
+		$selected_page_id = get_post_meta( $post->ID, 'login_page_id', true );
+		if ( ! is_string( $selected_page_id ) ) {
+			$selected_page_id = '';
+		}
 
 		/**
 		 * Retrieve all published pages
@@ -160,7 +167,7 @@ class Comblock_Login_Dashboard {
 				'order'       => 'ASC',
 				'numberposts' => -1,
 			)
-		) ?: array();
+		);
 
 		/** * @var string $options_html */
 		$options_html = sprintf( '<option value="0">%s</option>', esc_html__( 'Select a page', 'comblock-login' ) );
@@ -175,7 +182,7 @@ class Comblock_Login_Dashboard {
 			}
 		}
 
-		/** @var string $nonce */
+		/** * @var string $nonce Nonce field for security. */
 		$nonce = wp_nonce_field( 'save_page_nonce', 'page_nonce', true, false );
 
 		/**
@@ -213,41 +220,40 @@ class Comblock_Login_Dashboard {
 			),
 		);
 
-		// Sanitize the final output
 		echo wp_kses( $template_html, $allowed_html );
 	}
 
 	/**
 	 * Save meta box data securely
 	 *
-	 * @param int $post_id
+	 * @param int $post_id The ID of the post being saved.
 	 */
 	public function save_post( int $post_id ): void {
-		// Avoid autosave/revision saving
+		// Avoid autosave/revision saving.
 		if ( ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) || wp_is_post_revision( $post_id ) || empty( $_POST ) ) {
 			return;
 		}
 
-		// Verify nonce for roles
+		// Verify nonce for roles.
 		if ( ! isset( $_POST['roles_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['roles_nonce'] ) ), 'save_roles_nonce' ) ) {
 			return;
 		}
 
-		// Verify nonce for login page
+		// Verify nonce for login page.
 		if ( ! isset( $_POST['page_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['page_nonce'] ) ), 'save_page_nonce' ) ) {
 			return;
 		}
 
-		// Check user capability
+		// Check user capability.
 		if ( ! current_user_can( 'edit_post', $post_id ) ) {
 			return;
 		}
 
-		// Save selected roles
+		// Save selected roles.
 		/** * @var array<int, string> $roles */
 		$roles = array();
 		if ( isset( $_POST['allowed_user_roles'] ) && is_array( $_POST['allowed_user_roles'] ) ) {
-			$roles = array_map( 'sanitize_text_field', wp_unslash( $_POST['allowed_user_roles'] ) ?: array() );
+			$roles = array_map( 'sanitize_text_field', wp_unslash( $_POST['allowed_user_roles'] ) );
 		}
 		delete_post_meta( $post_id, 'allowed_user_roles' );
 		foreach ( $roles as $role ) {
@@ -256,7 +262,7 @@ class Comblock_Login_Dashboard {
 			}
 		}
 
-		// Save selected login page
+		// Save selected login page.
 		/** * @var int $page_id */
 		$page_id = isset( $_POST['login_page_id'] ) ? absint( $_POST['login_page_id'] ) : 0;
 		delete_post_meta( $post_id, 'login_page_id' );

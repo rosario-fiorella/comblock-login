@@ -1,6 +1,6 @@
 <?php
 
-defined( 'WPINC' ) or exit;
+defined( 'WPINC' ) || exit;
 
 /**
  * Renders the frontend login form via shortcode.
@@ -14,7 +14,7 @@ defined( 'WPINC' ) or exit;
  * @return string The login form HTML or error message.
  */
 function comblock_login_shortcode_template( array $attributes = array() ): string {
-	// Default attributes
+	// Default attributes.
 	$defaults = array(
 		'id'                => '',
 		'class'             => '',
@@ -22,22 +22,23 @@ function comblock_login_shortcode_template( array $attributes = array() ): strin
 		'privacy-page-id'   => '',
 	);
 
-	// Merge and sanitize attributes
+	// Merge and sanitize attributes.
 	$atts = shortcode_atts( $defaults, $attributes, 'comblock_login' );
 
-	// Sanitize inputs
+	// Sanitize inputs.
 	$id           = sanitize_key( $atts['id'] );
 	$class        = sanitize_html_class( $atts['class'] );
 	$method       = 'post';
 	$dashboard_id = absint( $atts['dashboard-post-id'] );
 	$policy_id    = absint( $atts['privacy-page-id'] );
-	$policy_url   = get_permalink( $policy_id ) ?: '';
 	$action_url   = '';
+	$policy_url   = get_permalink( $policy_id );
+	$policy_url   = $policy_id > 0 && $policy_url ? esc_url( $policy_url ) : '';
 
-	// Error message template
+	// Error message template.
 	$error_template = '<div class="notice notice-error inline"><p>%s</p></div>';
 
-	// Validate all shortcode attributes
+	// Validate all shortcode attributes.
 	if ( $id && '' === trim( $id ) ) {
 		return sprintf( $error_template, esc_html__( 'Error: The "id" shortcode attribute is required and must be valid.', 'comblock-login' ) );
 	}
@@ -54,13 +55,13 @@ function comblock_login_shortcode_template( array $attributes = array() ): strin
 		return sprintf( $error_template, esc_html__( 'Error: The "privacy-page-id" shortcode attribute is required and must be valid.', 'comblock-login' ) );
 	}
 
-	// Retrieve and clear transient errors
+	// Retrieve and clear transient errors.
 	$errors = get_transient( 'comblock_login_errors' );
-	if ( $errors !== false ) {
+	if ( false !== $errors ) {
 		delete_transient( 'comblock_login_errors' );
 	}
 
-	// Render form HTML via output buffering
+	// Render form HTML via output buffering.
 	ob_start();
 	?>
 	<form id="{form_id}" action="{form_action}" method="{form_method}" class="comblock-login {form_class}" novalidate="novalidate">
@@ -99,10 +100,13 @@ function comblock_login_shortcode_template( array $attributes = array() ): strin
 	</form>
 	<?php
 
-	// Get template HTML
-	$template_html = ob_get_clean() ?: '';
+	// Get template HTML.
+	$template_html = ob_get_clean();
+	if ( false === $template_html ) {
+		$template_html = '';
+	}
 
-	// Placeholder array for template substitution
+	// Placeholder array for template substitution.
 	$placeholders = array(
 		'{form_id}'              => esc_attr( $id ),
 		'{form_action}'          => $action_url,
@@ -124,10 +128,10 @@ function comblock_login_shortcode_template( array $attributes = array() ): strin
 		'{submit_label}'         => esc_html__( 'Log In', 'comblock-login' ),
 	);
 
-	// Replace placeholders with actual escaped values
+	// Replace placeholders with actual escaped values.
 	$template_html = str_replace( array_keys( $placeholders ), array_values( $placeholders ), $template_html );
 
-	// Allowed HTML tags and attributes for output sanitization
+	// Allowed HTML tags and attributes for output sanitization.
 	$allowed_html = array(
 		'form'     => array(
 			'id'         => true,

@@ -1,6 +1,6 @@
 <?php
 
-defined( 'WPINC' ) or exit;
+defined( 'WPINC' ) || exit;
 
 /**
  * Renders the frontend disconnection form via shortcode.
@@ -14,27 +14,27 @@ defined( 'WPINC' ) or exit;
  * @return string The disconnection form HTML or error message.
  */
 function comblock_disconnection_shortcode_template( array $attributes = array() ): string {
-	/** @var null|WP_Post $post */
+	/** * @var null|WP_Post $post */
 	global $post;
 
 	if ( ! is_user_logged_in() ) {
 		return '';
 	}
 
-	if ( ! $post instanceof WP_Post || $post->post_type !== Comblock_Login_Dashboard::POST_TYPE_SLUG ) {
+	if ( ! $post instanceof WP_Post || Comblock_Login_Dashboard::POST_TYPE_SLUG !== $post->post_type ) {
 		return '';
 	}
 
-	// Default attributes
+	// Default attributes.
 	$defaults = array(
 		'id'    => '',
 		'class' => '',
 	);
 
-	// Merge and sanitize attributes
+	// Merge and sanitize attributes.
 	$atts = shortcode_atts( $defaults, $attributes, 'user_info' );
 
-	// Sanitize inputs
+	// Sanitize inputs.
 	$id    = sanitize_key( $atts['id'] );
 	$class = sanitize_html_class( $atts['class'] );
 
@@ -54,10 +54,13 @@ function comblock_disconnection_shortcode_template( array $attributes = array() 
 	</form>
 	<?php
 
-	// Get template HTML
-	$template_html = ob_get_clean() ?: '';
+	// Get template HTML.
+	$template_html = ob_get_clean();
+	if ( false === $template_html ) {
+		$template_html = '';
+	}
 
-	// Placeholder array for template substitution
+	// Placeholder array for template substitution.
 	$placeholders = array(
 		'{form_id}'      => esc_attr( $id ),
 		'{form_class}'   => esc_attr( $class ),
@@ -67,10 +70,10 @@ function comblock_disconnection_shortcode_template( array $attributes = array() 
 		'{submit_label}' => esc_html__( 'Log out of all devices', 'comblock-login' ),
 	);
 
-	// Replace placeholders with actual escaped values
+	// Replace placeholders with actual escaped values.
 	$template_html = str_replace( array_keys( $placeholders ), array_values( $placeholders ), $template_html );
 
-	// Allowed HTML tags and attributes for output sanitization
+	// Allowed HTML tags and attributes for output sanitization.
 	$allowed_html = array(
 		'form'     => array(
 			'id'         => true,

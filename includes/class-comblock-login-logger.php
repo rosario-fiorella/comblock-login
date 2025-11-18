@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Class for logging messages related to login activities.
  *

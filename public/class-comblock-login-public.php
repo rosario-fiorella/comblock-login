@@ -10,7 +10,6 @@
  * @subpackage comblock-login/public
  */
 class Comblock_Login_Public {
-
 	/**
 	 * Enqueue stylesheet for public side.
 	 *

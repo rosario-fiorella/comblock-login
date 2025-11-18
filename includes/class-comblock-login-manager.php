@@ -165,11 +165,7 @@ class Comblock_Login_Manager {
 	 * @throws RuntimeException If any validation or authentication step fails.
 	 */
 	public function do_login(): void {
-		/**
-		 * Global WP_Roles object for role verification.
-		 *
-		 * @global null|WP_Roles $wp_roles
-		 */
+		/** * @global null|WP_Roles $wp_roles */
 		global $wp_roles;
 
 		try {

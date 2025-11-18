@@ -1,6 +1,6 @@
 <?php
 
-defined( 'WPINC' ) or exit;
+defined( 'WPINC' ) || exit;
 
 /**
  * Renders the frontend logout form via shortcode.
@@ -14,26 +14,26 @@ defined( 'WPINC' ) or exit;
  * @return string The logout form HTML or error message.
  */
 function comblock_logout_shortcode_template( array $attributes = array() ): string {
-	// Validate rendering: User logged in to frontend required
+	// Validate rendering: User logged in to frontend required.
 	if ( ! is_user_logged_in() || is_admin() ) {
 		return '';
 	}
 
-	// Default attributes
+	// Default attributes.
 	$defaults = array(
 		'id'    => '',
 		'class' => '',
 	);
 
-	// Merge and sanitize attributes
+	// Merge and sanitize attributes.
 	$atts = shortcode_atts( $defaults, $attributes, 'comblock_logout' );
 
-	// Sanitize inputs
+	// Sanitize inputs.
 	$id    = sanitize_key( $atts['id'] );
 	$class = sanitize_html_class( $atts['class'] );
 	$nonce = wp_nonce_field( 'comblock_do_logout', 'comblock_do_logout_nonce', true, false );
 
-	// Output the form
+	// Output the form.
 	ob_start();
 	?>
 	<form id="{form_id}" method="{form_method}" class="comblock-logout {form_class}" action="{form_action}" novalidate="novalidate">
@@ -48,10 +48,13 @@ function comblock_logout_shortcode_template( array $attributes = array() ): stri
 	</form>
 	<?php
 
-	// Cattura template HTML
-	$template_html = ob_get_clean() ?: '';
+	// Cattura template HTML.
+	$template_html = ob_get_clean();
+	if ( false === $template_html ) {
+		$template_html = '';
+	}
 
-	// Array placeholder per la sostituzione
+	// Array placeholder per la sostituzione.
 	$placeholders = array(
 		'{form_id}'      => esc_attr( $id ),
 		'{form_method}'  => 'post',
@@ -61,10 +64,10 @@ function comblock_logout_shortcode_template( array $attributes = array() ): stri
 		'{submit_label}' => esc_html__( 'Logout', 'comblock-login' ),
 	);
 
-	// Sostituisci placeholder con i valori reali
+	// Replace placeholder with actual values.
 	$template_html = str_replace( array_keys( $placeholders ), array_values( $placeholders ), $template_html );
 
-	// Allowed HTML tags and attributes
+	// Allowed HTML tags and attributes.
 	$allowed_html = array(
 		'form'     => array(
 			'id'         => true,
