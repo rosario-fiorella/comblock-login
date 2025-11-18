@@ -9,7 +9,7 @@ Stable tag: 1.0.0
 Requires PHP: 8.3
 License: GPL-2.0+
 License URI: http://www.gnu.org/licenses/gpl-2.0.txt
-
+Secure frontend login/logout with user dashboards, session management, and role-based access control for WordPress sites.
 == Description ==
 
 The Comblock Login plugin implements a complete and secure authentication system on the frontend for WordPress. Through dedicated shortcodes, you can easily insert login and logout forms, user information displays, and the option to log out of all active sessions on your site's content. The login process is strictly managed: user-entered data is sanitized, security is ensured through nonce verification to prevent CSRF attacks, and authentication is performed using native WordPress functions, with support for secure session storage and cookie management.
