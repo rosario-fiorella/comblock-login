@@ -20,6 +20,12 @@ class Comblock_Login_Manager {
 	 * @return void
 	 */
 	public function register_shortcode(): void {
+
+		// Avoid registering shortcodes during AJAX or REST API requests.
+		if ( wp_doing_ajax() || wp_is_json_request() ) {
+			return;
+		}
+
 		$this->register_login_shortcode();
 		$this->register_logout_shortcode();
 		$this->register_disconnection_shortcode();
@@ -251,8 +257,12 @@ class Comblock_Login_Manager {
 			/** * @var string $redirect */
 			$redirect = get_permalink( $dashboard_id );
 		} catch ( Throwable $e ) {
+			// Get form ID (not used here, but could be useful for logging/debugging).
+			$form_id = isset( $_POST['form_id'] ) ? sanitize_text_field( wp_unslash( $_POST['form_id'] ) ) : '';
+
 			// Save error message as a transient for showing after redirect.
 			set_transient( 'comblock_login_errors', esc_html( $e->getMessage() ), 30 );
+			set_transient( 'comblock_login_form_id', esc_html( $form_id ), 30 );
 
 			// On error, redirect back to referer or fallback to home URL.
 			$referer  = wp_get_raw_referer();
@@ -365,7 +375,7 @@ class Comblock_Login_Manager {
 		$redirect_url = get_permalink( $login_page_id );
 
 		/** * @var string $redirect_to */
-		$redirect_to = $redirect_url ? $redirect_url : home_url();
+		$redirect_to = $login_page_id > 0 && $redirect_url ? $redirect_url : home_url();
 
 		// Validate dashboard access permission.
 		if ( ! $is_logged ) {

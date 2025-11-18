@@ -39,16 +39,18 @@ function comblock_login_shortcode_template( array $attributes = array() ): strin
 	$error_template = '<div class="notice notice-error inline"><p>%s</p></div>';
 
 	// Validate all shortcode attributes.
+	if ( $dashboard_id < 1 ) {
+		return sprintf( $error_template, esc_html__( 'Error: The "dashboard-post-id" shortcode attribute is required and must be valid.', 'comblock-login' ) );
+	}
+
 	if ( $id && '' === trim( $id ) ) {
 		return sprintf( $error_template, esc_html__( 'Error: The "id" shortcode attribute is required and must be valid.', 'comblock-login' ) );
+	} elseif (! $id ) {
+		$id = 'comblock-login-form-' . $dashboard_id;
 	}
 
 	if ( $class && '' === trim( $class ) ) {
 		return sprintf( $error_template, esc_html__( 'Error: The "class" shortcode attribute is required and must be valid.', 'comblock-login' ) );
-	}
-
-	if ( $dashboard_id < 1 ) {
-		return sprintf( $error_template, esc_html__( 'Error: The "dashboard-post-id" shortcode attribute is required and must be valid.', 'comblock-login' ) );
 	}
 
 	if ( $policy_id > 0 && ! $policy_url ) {
@@ -56,9 +58,15 @@ function comblock_login_shortcode_template( array $attributes = array() ): strin
 	}
 
 	// Retrieve and clear transient errors.
-	$errors = get_transient( 'comblock_login_errors' );
-	if ( false !== $errors ) {
+	$form_id = get_transient( 'comblock_login_form_id' );
+
+	if ( $form_id === $id ) {
+        $errors = get_transient( 'comblock_login_errors' );
+
 		delete_transient( 'comblock_login_errors' );
+		delete_transient( 'comblock_login_form_id' );
+	} else {
+		$errors = '';
 	}
 
 	// Render form HTML via output buffering.
@@ -91,6 +99,7 @@ function comblock_login_shortcode_template( array $attributes = array() ): strin
 			<div class="comblock-login__hidden">
 				{nonce}
 				<input id="redirect_to" type="hidden" name="redirect_to" value="{redirect_to}" />
+				<input id="form_id" type="hidden" name="form_id" value="{form_id}" />
 			</div>
 			<div class="comblock-login__actions">
 				<button type="reset" class="comblock-login__button comblock-login__button--reset">{reset_label}</button>
