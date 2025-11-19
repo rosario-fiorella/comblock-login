@@ -79,7 +79,7 @@ class Comblock_Login_Shortcode_User {
 		global $wpdb;
 
 		if ( ! $wpdb instanceof wpdb ) {
-			throw new RuntimeException( __('Global "wpdb" not initialized.', 'comblock-login') );
+			throw new RuntimeException( esc_html__('Global "wpdb" not initialized.', 'comblock-login') );
 		}
 
 		$this->wpdb = $wpdb;
@@ -97,7 +97,7 @@ class Comblock_Login_Shortcode_User {
 		global $post;
 
 		if ( ! $post || ! $post instanceof WP_Post || Comblock_Login_Dashboard::POST_TYPE_SLUG !== $post->post_type ) {
-			throw new RuntimeException( __('Invalid post context.', 'comblock-login') );
+			throw new RuntimeException( esc_html__('Invalid post context.', 'comblock-login') );
 		}
 
 		$this->post = $post;
@@ -112,7 +112,7 @@ class Comblock_Login_Shortcode_User {
 	 */
 	protected function set_current_user(): void {
 		if ( ! is_user_logged_in() ) {
-			throw new RuntimeException( __('User not logged in.', 'comblock-login') );
+			throw new RuntimeException( esc_html__('User not logged in.', 'comblock-login') );
 		}
 
 		$this->user = wp_get_current_user();
