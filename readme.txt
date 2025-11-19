@@ -34,15 +34,17 @@ Logout not only allows you to securely end the current session, but also offers 
 
 == Usage ==
 
-- Use the shortcode `[comblock_login]` to display the login form. You can insert this shortcode into any page or post. This shortcode requires a mandatory attribute **`dashboard-post-id`**, whose value is the ID of a Dashboard post type created in the back office.
-It also handles other optional attributes: `id`, `class`, `privacy-page-id` with the value of the privacy policy page ID. 
-Complete example
+- Use the shortcode **`[comblock_login]`** to display the login form. You can insert this shortcode into any page or post.
+This shortcode requires a mandatory attribute **`dashboard-post-id`**, whose value is the ID of a Dashboard post type created in the back office.
+It also handles other optional attributes: `id`, `class`, and `privacy-page-id`, whose value is the ID of the privacy policy page.
+Complete example:
 **`[comblock_login id="subscriber-login" class="subscriber-form-login" dashboard-post-id="8" privacy-page-id="2"]`**
-- Use the shortcode `[comblock_logout]` in the dashboard post type to display the logout link. 
+- Use the shortcode **`[comblock_logout]`** only in the **`dashboard`** post type to display the logout link. 
 It also handles other optional attributes: `id`, `class`.
-- Use the shortcode `[comblock_disconnection]` in the dashboard post type to manage disconnection. 
+- Use the shortcode **`[comblock_disconnection]`** in the **`dashboard`** post type to display the disconnection link. 
 It also handles other optional attributes: `id`, `class`.
-- Use the shortcode `[comblock_user_info]` in the dashboard post type to display user information and the option to log out from all devices.
+- Use the shortcode **`[comblock_user_info title="my-section-title" fields="display_name,user_email"]`** in the **`dashboard`** post type to display user information. The `fields` attribute contains the user's meta fields separated by commas. Some meta fields cannot be used, while others can.
+It also handles other optional attributes: `id`, `class`.
 
 == Security ==
 
