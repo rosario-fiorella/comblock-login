@@ -45,7 +45,7 @@ function comblock_login_shortcode_template( array $attributes = array() ): strin
 
 	if ( $id && '' === trim( $id ) ) {
 		return sprintf( $error_template, esc_html__( 'Error: The "id" shortcode attribute is required and must be valid.', 'comblock-login' ) );
-	} elseif (! $id ) {
+	} elseif ( ! $id ) {
 		$id = 'comblock-login-form-' . $dashboard_id;
 	}
 
@@ -61,7 +61,7 @@ function comblock_login_shortcode_template( array $attributes = array() ): strin
 	$form_id = get_transient( 'comblock_login_form_id' );
 
 	if ( $form_id === $id ) {
-        $errors = get_transient( 'comblock_login_errors' );
+		$errors = get_transient( 'comblock_login_errors' );
 
 		delete_transient( 'comblock_login_errors' );
 		delete_transient( 'comblock_login_form_id' );

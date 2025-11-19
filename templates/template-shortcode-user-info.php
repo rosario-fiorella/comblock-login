@@ -10,9 +10,10 @@ defined( 'WPINC' ) || exit;
  *
  * @since 1.0.0
  *
+ * @param array<string, mixed> $attributes Shortcode attributes.
  * @return string The disconnection form HTML or error message.
  */
-function comblock_user_info_shortcode_template(): string {
+function comblock_user_info_shortcode_template( array $attributes = array() ): string {
 	/** * @var null|WP_Post $post */
 	global $post;
 
@@ -24,41 +25,56 @@ function comblock_user_info_shortcode_template(): string {
 		return '';
 	}
 
+	// Default attributes.
+	$defaults = array(
+		'title'  => esc_html__( 'User info', 'comblock-login' ),
+		'fields' => 'user_email,display_name',
+	);
+
+	// Merge and sanitize attributes.
+	$atts = shortcode_atts( $defaults, $attributes, 'comblock_user_info' );
+
+	/** * @var array<int, string> $fields */
+	$fields = explode( ',', $atts['fields'] );
+	if ( empty( $fields ) ) {
+		$fields = array();
+	}
+
 	/** * @var WP_User $user */
 	$user = wp_get_current_user();
 
 	/** * @var string $user_roles */
 	$user_roles = implode( ', ', $user->roles );
 
-	ob_start();
-	?>
-	<div class="comblock-user-info">
-		<legend class="comblock-user-info__legend">{user_info_label}</legend>
+	/** * @var string $html_fields */
+	$html_fields = '';
+	foreach ( $fields as $field ) {
+		// Sanitize field name.
+		$field = sanitize_key( trim( $field ) );
 
-		<div class="comblock-user-info__group">
-			<p><span class="dashicons dashicons-admin-users"></span> {display_name}</p>
-			<p><span class="dashicons dashicons-email"></span> <a href="mailto:{user_email}">{user_email}</a></p>
-			<p><span class="dashicons dashicons-admin-generic"></span> {user_roles}</p>
-		</div>
-	</div>
-	<?php
+		// Retrieve user property or meta.
+		$value = $user->has_prop( $field ) ? $user->get( $field ) : get_user_meta( $user->ID, $field, true );
+		$value = is_array( $value ) ? implode( ', ', $value ) : $value;
+		$value = esc_html( $value ? $value : '' );
 
-	// Get template HTML.
-	$template_html = ob_get_clean();
-	if ( false === $template_html ) {
-		$template_html = '';
+		// Format output based on field type.
+		if ( 'display_name' === $field ) {
+			$html_fields .= sprintf( '<p><span class="dashicons dashicons-admin-users"></span> %s</p>', $value );
+		} elseif ( 'user_email' === $field ) {
+			$html_fields .= sprintf( '<p><span class="dashicons dashicons-email"></span> <a href="mailto:%1$s">%1$s</a></p>', $value );
+		} elseif ( 'user_roles' === $field ) {
+			$html_fields .= sprintf( '<p><span class="dashicons dashicons-admin-generic"></span> %s</p>', $user_roles );
+		} else {
+			$html_fields .= sprintf( '<p><span class="dashicons dashicons-info"></span> %s: %s</p>', esc_html( ucwords( str_replace( '_', ' ', $field ) ) ), $value );
+		}
 	}
 
-	// Placeholder array for template substitution.
-	$placeholders = array(
-		'{user_info_label}' => esc_html__( 'User info', 'comblock-login' ),
-		'{display_name}'    => esc_html( $user->display_name ),
-		'{user_email}'      => esc_html( $user->user_email ),
-		'{user_roles}'      => esc_html( $user_roles ),
-	);
-
-	// Replace placeholders with actual escaped values.
-	$template_html = str_replace( array_keys( $placeholders ), array_values( $placeholders ), $template_html );
+	// Build the final HTML output.
+	$template_html  = '';
+	$template_html .= '<div class="comblock-user-info">';
+	$template_html .= sprintf( '<legend class="comblock-user-info__legend">%s</legend>', esc_html( $atts['title'] ) );
+	$template_html .= sprintf( '<div class="comblock-user-info__group">%s</div>', $html_fields );
+	$template_html .= '</div>';
 
 	// Allowed HTML tags and attributes for output sanitization.
 	$allowed_html = array(
