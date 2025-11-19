@@ -61,6 +61,7 @@ class Comblock_Login {
 		require_once $plugin_path . 'includes/class-comblock-login-loader.php';
 		require_once $plugin_path . 'includes/class-comblock-login-dashboard.php';
 		require_once $plugin_path . 'includes/class-comblock-login-manager.php';
+		require_once $plugin_path . 'includes/class-comblock-login-shortcode-user.php';
 		require_once $plugin_path . 'public/class-comblock-login-public.php';
 		require_once $plugin_path . 'templates/template-shortcode-auth-login.php';
 		require_once $plugin_path . 'templates/template-shortcode-auth-logout.php';
