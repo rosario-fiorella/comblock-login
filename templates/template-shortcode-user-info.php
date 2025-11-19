@@ -57,15 +57,18 @@ function comblock_user_info_shortcode_template( array $attributes = array() ): s
 		$value = is_array( $value ) ? implode( ', ', $value ) : $value;
 		$value = esc_html( $value ? $value : '' );
 
+		// CSS class for the field.
+		$css_class = 'user-info field-' . esc_attr( $field );
+
 		// Format output based on field type.
 		if ( 'display_name' === $field ) {
-			$html_fields .= sprintf( '<p><span class="dashicons dashicons-admin-users"></span> %s</p>', $value );
+			$html_fields .= sprintf( '<p class="%s"><span class="dashicons dashicons-admin-users"></span> %s</p>', $css_class, $value );
 		} elseif ( 'user_email' === $field ) {
-			$html_fields .= sprintf( '<p><span class="dashicons dashicons-email"></span> <a href="mailto:%1$s">%1$s</a></p>', $value );
+			$html_fields .= sprintf( '<p class="%s"><span class="dashicons dashicons-email"></span> <a href="mailto:%2$s">%2$s</a></p>', $css_class, sanitize_email( $value ) );
 		} elseif ( 'user_roles' === $field ) {
-			$html_fields .= sprintf( '<p><span class="dashicons dashicons-admin-generic"></span> %s</p>', $user_roles );
+			$html_fields .= sprintf( '<p class="%s"><span class="dashicons dashicons-admin-generic"></span> %s</p>', $css_class, $user_roles );
 		} else {
-			$html_fields .= sprintf( '<p><span class="dashicons dashicons-info"></span> %s: %s</p>', esc_html( ucwords( str_replace( '_', ' ', $field ) ) ), $value );
+			$html_fields .= sprintf( '<p class="%s"><span class="dashicons dashicons-info"></span> %s: %s</p>', $css_class, esc_html( ucwords( str_replace( '_', ' ', $field ) ) ), $value );
 		}
 	}
 
