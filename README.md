@@ -49,7 +49,6 @@ It also handles other optional attributes: `id`, `class`.
 - Use the shortcode **`[comblock_disconnection]`** in the **`dashboard`** post type to display the disconnection link. 
 It also handles other optional attributes: `id`, `class`.
 - Use the shortcode **`[comblock_user_info title="my-section-title" fields="display_name,user_email"]`** in the **`dashboard`** post type to display user information. The `fields` attribute contains the user's meta fields separated by commas. Some meta fields cannot be used, while others can.
-It also handles other optional attributes: `id`, `class`.
 
 ## Security
 
