@@ -40,15 +40,38 @@ Logout not only allows you to securely end the current session, but also offers 
 ## Usage
 
 - Use the shortcode **`[comblock_login]`** to display the login form. You can insert this shortcode into any page or post.
-This shortcode requires a mandatory attribute **`dashboard-post-id`**, whose value is the ID of a Dashboard post type created in the back office.
-It also handles other optional attributes: `id`, `class`, and `privacy-page-id`, whose value is the ID of the privacy policy page.
-Complete example:
-**`[comblock_login id="subscriber-login" class="subscriber-form-login" dashboard-post-id="8" privacy-page-id="2"]`**
-- Use the shortcode **`[comblock_logout]`** only in the **`dashboard`** post type to display the logout link. 
-It also handles other optional attributes: `id`, `class`.
-- Use the shortcode **`[comblock_disconnection]`** in the **`dashboard`** post type to display the disconnection link. 
-It also handles other optional attributes: `id`, `class`.
-- Use the shortcode **`[comblock_user_info title="my-section-title" fields="display_name,user_email"]`** in the **`dashboard`** post type to display user information. The `fields` attribute contains the user's meta fields separated by commas. Some meta fields cannot be used, while others can.
+  Simple example (only required attribute):  
+  **`[comblock_login dashboard-post-id="8"]`**  
+  Complete example (with all optional attributes):  
+  **`[comblock_login id="subscriber-login" class="subscriber-form-login" dashboard-post-id="8" privacy-page-id="2"]`**  
+  Where:  
+  - `dashboard-post-id` is mandatory and represents the ID of a Dashboard post type created in the back office.  
+  - `id`, `class`, and `privacy-page-id` are optional, where `privacy-page-id` refers to the privacy policy page ID.
+
+- Use the shortcode **`[comblock_logout]`** only within the **`dashboard`** post type to display the logout link.  
+  Simple example (without optional attributes):  
+  **`[comblock_logout]`**  
+  Complete example (with optional attributes):  
+  **`[comblock_logout id="logout-link" class="btn-logout"]`**
+
+- Use the shortcode **`[comblock_disconnection]`** within the **`dashboard`** post type to display the disconnection link.
+  Simple example:  
+  **`[comblock_disconnection]`**
+  Complete example:  
+  **`[comblock_disconnection id="disconn-link" class="btn-disconnect"]`**
+
+- Use the shortcode **`[comblock_user_info]`** within the **`dashboard`** post type to display user information.  
+  Simple example (only required attribute):  
+  **`[comblock_user_info fields="display_name,user_email"]`**  
+  Complete example (with title and all attributes):  
+  **`[comblock_user_info title="my-section-title" fields="display_name,user_email"]`**  
+  The `fields` attribute contains user meta fields separated by commas. Note that some meta fields cannot be used for security or privacy reasons.
+
+  To address this, the plugin provides two filters hooks:  
+  - **`comblock_login_user_ban_fields`** allows you to add meta fields that you shouldn't use.  
+  - **`comblock_login_user_info_allowed_fields`** permits extending the list of meta fields that are allowed for searching and displaying user metadata.
+
+  These hooks enable developers to customize which user data can be displayed via the shortcode while maintaining control over security and privacy.
 
 ## Security
 
