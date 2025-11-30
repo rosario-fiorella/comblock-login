@@ -14,7 +14,7 @@ class Comblock_Login_Dashboard {
 	/**
 	 * Post type slug
 	 */
-	public const string POST_TYPE_SLUG = 'comblock_dashboard';
+	const POST_TYPE_SLUG = 'comblock_dashboard';
 
 	/**
 	 * Register custom post type

@@ -16,14 +16,14 @@ class Comblock_Login {
 	 *
 	 * @since 1.0.0
 	 */
-	public const string DOMAIN = 'comblock-login';
+	const DOMAIN = 'comblock-login';
 
 	/**
 	 * Plugin version.
 	 *
 	 * @since 1.0.0
 	 */
-	public const string VERSION = '1.0.0';
+	const VERSION = '1.0.0';
 
 	/**
 	 * Loader instance for registering hooks.

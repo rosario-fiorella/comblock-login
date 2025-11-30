@@ -15,12 +15,12 @@ class Comblock_Login_Loader {
 	/**
 	 * Default priority for hooks
 	 */
-	private const DEFAULT_PRIORITY = 10;
+	const DEFAULT_PRIORITY = 10;
 
 	/**
 	 * Default number of accepted arguments
 	 */
-	private const DEFAULT_ACCEPTED_ARGS = 1;
+	const DEFAULT_ACCEPTED_ARGS = 1;
 
 	/**
 	 * The array of actions registered with WordPress.
